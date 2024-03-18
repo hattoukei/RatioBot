@@ -33,6 +33,8 @@ let validUsers = [
 
 // Performs commands if Dr. Ratio is pinged.
 function ifPinged(msg) {
+    let uuid = msg.author.id;
+
     if (canPing === true) {
         canPing = false;
         timer = setTimeout(toggleCanPing, 15000);
@@ -60,20 +62,20 @@ function ifPinged(msg) {
             return;
         }
         // CHECKS FOR SPECIFIC USER CASES
-        else if (validUsers.includes(msg.author.id)) {
-            if (msg.author.id === validUsers[0]) {
+        else if (validUsers.includes(uuid)) {
+            if (uuid === validUsers[0]) {
                 // Case: Me
                 msg.reply({
                     content: "hi.",
                 });
                 return;
-            } else if (msg.author.id === validUsers[1]) {
+            } else if (uuid === validUsers[1]) {
                 // Case: Ushi
                 msg.reply({
                     content: "grogas",
                 });
                 return;
-            } else if (msg.author.id === validUsers[2]) {
+            } else if (uuid === validUsers[2]) {
                 // Case: the hater
                 msg.reply({
                     content:
@@ -87,20 +89,20 @@ function ifPinged(msg) {
                     files: [{ attachment: "src/images/yone1.png" }],
                 });
                 return;
-            } else if (msg.author.id === validUsers[3]) {
+            } else if (uuid === validUsers[3]) {
                 // Case: the complainer
                 msg.reply({
                     content: "Please, don't ever talk to me again. Also:",
                     files: [{ attachment: "src/images/ohgodno1.png" }],
                 });
                 return;
-            } else if (msg.author.id === validUsers[4]) {
+            } else if (uuid === validUsers[4]) {
                 // Case: Hdeth
                 msg.reply({
                     contents: `Mind if we grab a cup of tea later this evening, ${msg.author.globalName}?`,
                 });
                 return;
-            } else if (msg.author.id === validUsers[5]) {
+            } else if (uuid === validUsers[5]) {
                 // Case: Darth Fetus
                 msg.reply({
                     contents:

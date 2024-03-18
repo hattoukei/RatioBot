@@ -2,11 +2,11 @@ require("dotenv").config();
 
 const botCommands = require("./bot-commands.js");
 const userInteractions = require("./user-interactions.js");
-const { Client, IntentsBitField, ActivityType } = require("discord.js"); // import
+const { Client, IntentsBitField, ActivityType } = require("discord.js");
 
 const client = new Client({
     intents: [
-        IntentsBitField.Flags.Guilds, // bot has access to the `Guilds` intents (discord js doc). also a guild is a server in discord js
+        IntentsBitField.Flags.Guilds, 
         IntentsBitField.Flags.GuildMembers,
         IntentsBitField.Flags.GuildMessages,
         IntentsBitField.Flags.MessageContent,
@@ -16,7 +16,6 @@ const client = new Client({
 // When bot first comes online.
 client.on("ready", (c) => {
     console.log(`Hello, ${c.user.tag}`);
-    // client.channels.cache.get("1218712862143414392").send({content: "anthony(beta) n-word counter: 48"});
 
     client.user.setPresence({
         activities: [
