@@ -34,88 +34,98 @@ let validUsers = [
 // Performs commands if Dr. Ratio is pinged.
 function ifPinged(msg) {
     let uuid = msg.author.id;
+    let lowered = msg.content.toLowerCase();
 
     if (canPing === true) {
         canPing = false;
         timer = setTimeout(toggleCanPing, 15000);
 
         // CHECK FOR CONTENT SPECIFIC CASES
-        if (msg.content.toLowerCase().includes("fuck you")) {
+        if (lowered.includes("fuck you")) {
             msg.reply("fuck you too");
             return;
-        } else if (msg.content.toLowerCase().includes("fuck off")) {
+        } else if (lowered.includes("fuck off")) {
             msg.reply("nah.");
             return;
-        } else if (msg.content.toLowerCase().includes("kys")) {
+        } else if (lowered.includes("kys")) {
             msg.reply(`i'm going to cum on your forehead.`);
             return;
-        } else if (msg.content.toLowerCase().includes("do you play")) {
+        } else if (lowered.includes("do you play")) {
             msg.reply(
                 `I will not belittle myself to play these so called "games".`
             );
             return;
-        } else if (msg.content.toLowerCase().includes("anthony")) {
+        } else if (lowered.includes("anthony")) {
             msg.reply(`Please never mention that name ever again.`);
             return;
-        } else if (msg.content.toLowerCase().includes("sparkle")) {
+        } else if (lowered.includes("sparkle")) {
             msg.reply(`I am elation!`);
             return;
         }
         // CHECKS FOR SPECIFIC USER CASES
         else if (validUsers.includes(uuid)) {
-            if (uuid === validUsers[0]) {
+            switch (uuid) {
                 // Case: Me
-                msg.reply({
-                    content: "hi.",
-                });
-                return;
-            } else if (uuid === validUsers[1]) {
+                case validUsers[0]:
+                    msg.reply({
+                        content: "hi.",
+                    });
+                    break;
+
                 // Case: Ushi
-                msg.reply({
-                    content: "grogas",
-                });
-                return;
-            } else if (uuid === validUsers[2]) {
+                case validUsers[1]:
+                    msg.reply({
+                        content: "grogas",
+                    });
+                    break;
+
                 // Case: the hater
-                msg.reply({
-                    content:
-                        "You are like a primitive version of me, except you are just racist." +
-                        "\n" +
-                        "Also:" +
-                        "\n" +
-                        "https://www.op.gg/summoners/na/OmlitD-NA1/matches/RvuDQoxvmIJG923-34PgH4t2b7h0jKssqEoBIWzr6HE%3D/1709951892000" +
-                        "\n" +
-                        "https://iaace-na.github.io/lol-match-stats-viewer/?match=https%3A%2F%2Frewind.lol%2Fgetmatch%2FNA%2F4794143099%2Fstats",
-                    files: [{ attachment: "src/images/yone1.png" }],
-                });
-                return;
-            } else if (uuid === validUsers[3]) {
+                case validUsers[2]:
+                    msg.reply({
+                        content:
+                            "You are like a primitive version of me, except you are racist." +
+                            "\n" +
+                            "Also:" +
+                            "\n" +
+                            "https://www.op.gg/summoners/na/OmlitD-NA1/matches/RvuDQoxvmIJG923-34PgH4t2b7h0jKssqEoBIWzr6HE%3D/1709951892000" +
+                            "\n" +
+                            "https://iaace-na.github.io/lol-match-stats-viewer/?match=https%3A%2F%2Frewind.lol%2Fgetmatch%2FNA%2F4794143099%2Fstats",
+                        files: [{ attachment: "src/images/yone1.png" }],
+                    });
+                    break;
+
                 // Case: the complainer
-                msg.reply({
-                    content: "Please, don't ever talk to me again. Also:",
-                    files: [{ attachment: "src/images/ohgodno1.png" }],
-                });
-                return;
-            } else if (uuid === validUsers[4]) {
+                case validUsers[3]:
+                    msg.reply({
+                        content: "Please, don't ever talk to me again. Also:",
+                        files: [{ attachment: "src/images/ohgodno1.png" }],
+                    });
+                    break;
+
                 // Case: Hdeth
-                msg.reply({
-                    contents: `Mind if we grab a cup of tea later this evening, ${msg.author.globalName}?`,
-                });
-                return;
-            } else if (uuid === validUsers[5]) {
+                case validUsers[4]:
+                    msg.reply({
+                        contents: `Mind if we grab a cup of tea later this evening, ${msg.author.globalName}?`,
+                    });
+                    break;
+
                 // Case: Darth Fetus
-                msg.reply({
-                    contents:
-                        "Wait... I've seen you before. Your ass ran it down 26 deaths in my game a few days ago." +
-                        "\n" +
-                        "https://iaace-na.github.io/lol-match-stats-viewer/?match=https%3A%2F%2Frewind.lol%2Fgetmatch%2FNA%2F4911615208%2Fstats",
-                    files: [{ attachment: "src/images/nunu1" }],
-                });
-                return;
+                case validUsers[5]:
+                    msg.reply({
+                        contents:
+                            "Wait... I've seen you before. Your ass ran it down 26 deaths in my game a few days ago." +
+                            "\n" +
+                            "https://iaace-na.github.io/lol-match-stats-viewer/?match=https%3A%2F%2Frewind.lol%2Fgetmatch%2FNA%2F4911615208%2Fstats",
+                        files: [{ attachment: "src/images/nunu1" }],
+                    });
+                    break;
+
+                // Default case for if user is in validUser but does not have a defined scenario.
+                default:
+                    msg.reply(
+                        `I'm using you as a default case. <@${validUsers[0]}>`
+                    );
             }
-            // Case for if user is in validUser but does not have a defined scenario.
-            msg.reply(`I'm using you as an empty case. <@${validUsers[0]}>`);
-            return;
         } else {
             // Case for if user is in validUser but does not have a defined scenario.
             msg.reply(`Huh?`);
@@ -138,27 +148,13 @@ module.exports = {
     checkUserInteraction: function (msg, client) {
         let found = false;
 
-        console.log("Running interaction");
-
         if (msg.mentions.has(client.user)) {
-            console.log("Running ping");
-            // set found equal to true so your index.js file knows
-            //   to not try executing 'other' commands
             found = true;
-            // execute function associated with this command
             ifPinged(msg);
-            console.log("Ping executed");
-        } else if (msg.content.toLowerCase().includes("ratio")) {
-            console.log("Running reference");
-
+        } else if (msg.content.includes("ratio")) {
             found = true;
             ifReferenced(msg);
-            console.log("Reference executed");
         }
-
-        console.log("exiting interaction");
-
-        // value of 'found' will be returned in index.js
         return found;
     },
 };
