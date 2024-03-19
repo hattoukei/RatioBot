@@ -11,6 +11,10 @@ const commands = [
         description: "please don't.",
     },
     {
+        name: "sleep",
+        description: "puts the bot to sleep.",
+    },
+    {
         name: "roll",
         description: "rolls some dice.",
         options: [

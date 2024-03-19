@@ -1,7 +1,8 @@
 const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
-    checkBotCommand: function (interaction) {
+    checkBotCommand: async function (interaction) {
+        sleep = false;
         let random;
 
         switch (interaction.commandName) {
@@ -13,13 +14,23 @@ module.exports = {
             // Meows with a 1/100 chance.
             case "meow":
                 random = Math.floor(Math.random() * 100);
-                console.log(random);
+                console.log(`Meow rolled '${random}'`);
                 if (random === 1) {
-                    interaction.reply("...Meow?");
+                    interaction.reply("nya!!~~ >///<");
                 } else {
                     interaction.reply("What the fuck?");
                 }
                 break;
+
+            // Ends the bot's process
+            case "sleep":
+                await interaction.reply({
+                    content: "Shutting down...",
+                    files: [{ attachment: "src/images/amimir.jpeg" }],
+                })
+
+                sleep = true;
+                return sleep;
 
             // Rolls some dice.
             case "roll":
@@ -135,5 +146,6 @@ module.exports = {
                 interaction.reply({ embeds: [embed] });
                 break;
         }
+        return sleep;
     },
 };

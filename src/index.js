@@ -45,15 +45,18 @@ client.on("messageCreate", (msg) => {
 });
 
 // COMMAND INTERACTIONS ONLY
-client.on("interactionCreate", (interaction) => {
+client.on("interactionCreate", async interaction => {
     // Displays interaction and author
     console.log(
-        `[${interaction.guild.nameAcronym}] ${interaction.user.globalName}: ${interaction.content} ${interaction.options.get("dice").value}`
+        `[${interaction.guild.nameAcronym}] ${interaction.user.globalName}: /${interaction.commandName} ${interaction.options.data}` // Fix later
     );
 
     if (!interaction.isChatInputCommand()) return;
 
-    if (botCommands.checkBotCommand(interaction)) {
+    if (await botCommands.checkBotCommand(interaction)) {
+        console.log('Client is now asleep.')
+        client.destroy();
+
         return;
     }
 });
