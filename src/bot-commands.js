@@ -16,11 +16,15 @@ module.exports = {
                 random = Math.floor(Math.random() * 100);
                 console.log(`Meow rolled '${random}'`);
                 if (random === 1) {
+                    interaction.reply("uwu~~ nya!!! :3");
+                } else if (random === 2) {
+                    interaction.reply("the ting go uwaaaa! >///< nya nya nya nya nya! :3");
+                } else if (random === 3) {
                     interaction.reply("nya!!~~ >///<");
                 } else {
                     interaction.reply("What the fuck?");
                 }
-                break;
+                break
 
             // Ends the bot's process
             case "sleep":
@@ -35,6 +39,7 @@ module.exports = {
             // Rolls some dice.
             case "roll":
                 const die = interaction.options.get("dice").value;
+                console.log(`User entered '${die}'`);
 
                 let output = `Rolling a ${die}.` + "\n" + "You rolled a";
                 let count = 1;
@@ -43,7 +48,7 @@ module.exports = {
                 if (die.includes("d")) {
                     count = Number(die.substring(0, die.lastIndexOf("d")));
 
-                    //terrible catch error
+                    //terrible catch error 
                     if (count > 20) {
                         interaction.reply("Please do not go over 20 dice.");
                         break;
@@ -55,7 +60,6 @@ module.exports = {
                 }
 
                 // terrible catch error
-                console.log(count);
                 if (
                     isNaN(roll) ||
                     isNaN(count) ||

@@ -15,6 +15,15 @@
             "interaction": [
                 {
                     "content": "grogas."
+                },
+                {
+                    "content": "you are NOT the god killer."
+                },
+                {
+                    "content": "scuba gragas."
+                },
+                {
+                    "content": "malevolent kitchen."
                 }
             ]
         },
@@ -74,6 +83,24 @@
                     "content": "John Cena?"
                 }
             ]
+        },
+        {
+            "uuid": "548283585602387969",
+            "nickname": "ResiRess",
+            "interaction": [
+                { 
+                    "content": "How many Bronyas did you get again?"
+                }
+            ]
+        },
+        {
+            "uuid": "378601199630286860",
+            "nickname": "LabGrownHomie",
+            "interaction": [
+                { 
+                    "content": "Hello Arlan enjoyer."
+                }
+            ]
         }
     ],
     "validSubstring": [
@@ -122,6 +149,30 @@
             "interaction": [
                 {
                     "content": "I am elation!"
+                }
+            ]
+        },
+        {
+            "substring": "primitive",
+            "interaction": [
+                {
+                    "content": "Who?"
+                }
+            ]
+        },
+        {
+            "substring": "mahoraga",
+            "interaction": [
+                {
+                    "files": [{ "attachment": "src/images/mahoraga.png"  }]
+                }
+            ]
+        },
+        {
+            "substring": "firefly",
+            "interaction": [
+                {
+                    "files": [{ "attachment": "src/images/ffcope.jpeg"  }]
                 }
             ]
         }

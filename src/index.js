@@ -1,6 +1,11 @@
 require("dotenv").config();
 
+const database = require('pg')
+
+client.connect();
+
 const botCommands = require("./bot-commands.js");
+const eventHandler = require("./handlers/eventHandler.js");
 const userInteractions = require("./user-interactions.js");
 const { Client, IntentsBitField, ActivityType } = require("discord.js");
 
@@ -13,6 +18,16 @@ const client = new Client({
     ],
 });
 
+(async() => {
+    await database.connect(
+        
+    );
+
+    eventHandler(client);
+})();
+databaseHandler()
+
+/*
 // When bot first comes online.
 client.on("ready", (c) => {
     console.log(`Hello, ${c.user.tag}`);
@@ -31,17 +46,12 @@ client.on("ready", (c) => {
 
 // Scans each message sent.
 client.on("messageCreate", (msg) => {
+    // todo: add user to database if id is not already in.
+
     // Displays message and author.
     console.log(
         `[${msg.guild.nameAcronym}] ${msg.author.globalName}: "${msg.content}"`
     );
-    if (msg.author.bot) {
-        return;
-    } else if (userInteractions.checkUserInteraction(msg, client)) {
-        return;
-    } else {
-        return;
-    }
 });
 
 // COMMAND INTERACTIONS ONLY
@@ -60,5 +70,6 @@ client.on("interactionCreate", async interaction => {
         return;
     }
 });
+*/
 
 client.login(process.env.TOKEN);

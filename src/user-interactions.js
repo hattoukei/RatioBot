@@ -10,6 +10,10 @@ This file handles all user interactions.
     ifReferenced(): Replies based on message content
 */
 
+let timer;
+let canPing = true;
+let canReference = true;
+
 function toggleCanPing() {
     canPing = true;
     clearTimeout(timer);
@@ -20,10 +24,6 @@ function toggleCanReference() {
     clearTimeout(timer);
 }
 
-let timer;
-let canPing = true;
-let canReference = true;
-
 // Performs commands if Dr. Ratio is pinged.
 function ifPinged(msg) {
     let uuid = msg.author.id;
@@ -31,7 +31,7 @@ function ifPinged(msg) {
 
     if (canPing === true) {
         canPing = false;
-        timer = setTimeout(toggleCanPing, 15000);
+        timer = setTimeout(toggleCanPing, 1000);
 
         // CHECK FOR CONTENT SPECIFIC CASES
         if (helper.checkValidSubstring(lowered, responses.validSubstring)) {
@@ -51,7 +51,8 @@ function ifPinged(msg) {
             if (user.uuid === "310812771971235841") {
                 msg.reply("yeah");
             } else {
-                msg.reply(user.interaction[0]);
+                random = Math.floor(Math.random() * user.interaction.length)
+                msg.reply(user.interaction[random]);
             }
 
             // DEFAULT CASE IF NOT IN VALID USER
