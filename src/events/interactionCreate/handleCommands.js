@@ -1,7 +1,7 @@
 const { devs, testServer } = require("../../../config.json");
 const getLocalCommands = require("../../utils/getLocalCommands");
 
-module.exports = async (client, interaction) => {
+module.exports = async (client, interaction, database) => {
   console.log(
     `[${interaction.guild.nameAcronym}] ${interaction.user.globalName}: /${interaction.commandName} ${interaction.options.data}` // Fix later
   );

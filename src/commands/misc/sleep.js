@@ -11,6 +11,8 @@ module.exports = {
       content: "Shutting down...",
       files: [{ attachment: "src/images/amimir.jpeg" }],
     });
-    client.destroy()
+
+    await client.destroy();
+    console.log('Client has successfully been shut down.')
   },
 };

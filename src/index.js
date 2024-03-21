@@ -1,9 +1,5 @@
 require("dotenv").config();
 
-const database = require('pg')
-
-client.connect();
-
 const botCommands = require("./bot-commands.js");
 const eventHandler = require("./handlers/eventHandler.js");
 const userInteractions = require("./user-interactions.js");
@@ -19,13 +15,8 @@ const client = new Client({
 });
 
 (async() => {
-    await database.connect(
-        
-    );
-
     eventHandler(client);
 })();
-databaseHandler()
 
 /*
 // When bot first comes online.
