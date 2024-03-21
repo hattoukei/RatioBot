@@ -1,13 +1,3 @@
-const { Pool } = require('pg')
-
-const database = new Pool ({
-    host: "localhost",
-    port: 5432,
-    database: "ratiodb"
-})
-
-database.connect()
-
 module.exports = {
   name: "dbdel",
   description: "deletes you from database",
@@ -17,39 +7,53 @@ module.exports = {
   // deleted: Boolean,
 
   callback: async (client, interaction) => {
-      let user = interaction.user;
-      console.log(`Attempting to delete '${user.id}' as '${user.username}' from database.`)
+    const { Pool } = require("pg");
+    const database = new Pool({
+      host: "localhost",
+      port: 5432,
+      database: "ratiodb",
+    });
 
-      let temp = await database.query(`SELECT uuid FROM users WHERE ${user.id} = uuid`)
+    database.connect();
+    let user = interaction.user;
+    console.log(
+      `Attempting to delete '${user.id}' as '${user.username}' from database.`
+    );
 
-      try {
-        if (temp.rows.length === 1) {
-          const query = {
-            text: `DELETE FROM users WHERE uuid = ${user.id}`
-          }
-            const res = await database.query(query)
+    let temp = await database.query(
+      `SELECT uuid FROM users WHERE ${user.id} = uuid`
+    );
 
-            console.log(`Deleting UUID '${user.id}' from database.`)
-            interaction.reply({
-              content: `Your UUID: ${user.id} has been successfully deleted`,
-              ephemeral: true,
-            })
-        } else {
-          console.log(`UUID: ${user.id} has not been found in the database.`)
-          interaction.reply({
-            content: `Your information is not stored in the database.`,
-            ephemeral: true,
-          })
-        }
-      } catch (error) {
+    try {
+      if (temp.rows.length === 1) {
+        const query = {
+          text: `DELETE FROM users WHERE uuid = ${user.id}`,
+        };
+        const res = await database.query(query);
+
+        console.log(`Deleting UUID '${user.id}' from database.`);
         interaction.reply({
-          content: `An error has occurred while deleting you from the database.`,
+          content: `Your UUID: ${user.id} has been successfully deleted`,
           ephemeral: true,
-        })
-        console.log(`There was an error deleting ${user.username} from the database: ${error}`)
+        });
+      } else {
+        console.log(`UUID: ${user.id} has not been found in the database.`);
+        interaction.reply({
+          content: `Your information is not stored in the database.`,
+          ephemeral: true,
+        });
       }
-      res = await database.query('SELECT * FROM users')
+    } catch (error) {
+      interaction.reply({
+        content: `An error has occurred while deleting you from the database.`,
+        ephemeral: true,
+      });
+      console.log(
+        `There was an error deleting ${user.username} from the database: ${error}`
+      );
+    }
+    res = await database.query("SELECT * FROM users");
 
-      console.log(res.rows)
-    },
+    console.log(res.rows);
+  },
 };

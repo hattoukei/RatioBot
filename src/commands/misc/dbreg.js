@@ -1,13 +1,3 @@
-const { Pool } = require('pg')
-
-const database = new Pool ({
-    host: "localhost",
-    port: 5432,
-    database: "ratiodb"
-})
-
-database.connect()
-
 module.exports = {
   name: "dbreg",
   description: "registers your uuid and name for the bot",
@@ -17,40 +7,58 @@ module.exports = {
   // deleted: Boolean,
 
   callback: async (client, interaction) => {
-      let user = interaction.user;
-      console.log(`Attempting to register '${user.id}' as '${user.username}'.`)
+    const { Pool } = require("pg");
+    const database = new Pool({
+      host: "localhost",
+      port: 5432,
+      database: "ratiodb",
+    });
+    database.connect();
 
-      let temp = await database.query(`SELECT uuid FROM users WHERE ${user.id} = uuid`)
+    let user = interaction.user;
+    console.log(`Attempting to register '${user.id}' as '${user.username}'.`);
 
-      try {
-        if (temp.rows.length === 0) {
-          const query = {
-            text: 'INSERT INTO users(uuid, username) VALUES($1, $2)',
-            values: [user.id, user.username],
-          }
-            await database.query(query)
+    let temp = await database.query(
+      `SELECT uuid FROM users WHERE ${user.id} = uuid`
+    );
 
-            console.log(`UUID: ${user.id} has successfuly been registered.`)
-            interaction.reply({
-              content: `You have been successfully registered! UUID: ${user.id}`,
-              ephemeral: true,
-            })
-        } else {
-          console.log(`UUID: ${user.id} has already been registered.`)
-          interaction.reply({
-            content: `You have already been registered.`,
-            ephemeral: true,
-          })
-        }
-      } catch (error) {
+    try {
+      if (temp.rows.length === 0) {
+        const query1 = {
+          text: "INSERT INTO users (uuid, username) VALUES($1, $2)",
+          values: [user.id, user.username],
+        };
+        await database.query(query1);
+
+        const query2 = {
+          text: "INSERT INTO stats (uuid) VALUES($1)",
+          values: [user.id],
+        };
+        await database.query(query2);
+
+        console.log(`UUID: ${user.id} has successfuly been registered.`);
         interaction.reply({
-          content: `An error has occurred while registering you to the database.`,
+          content: `You have been successfully registered! UUID: ${user.id}`,
           ephemeral: true,
-        })
-        console.log(`Register error: ${error}`)
+        });
+      } else {
+        console.log(`UUID: ${user.id} has already been registered.`);
+        interaction.reply({
+          content: `You have already been registered.`,
+          ephemeral: true,
+        });
       }
-      res = await database.query('SELECT * FROM users')
+    } catch (error) {
+      interaction.reply({
+        content: `An error has occurred while registering you to the database.`,
+        ephemeral: true,
+      });
+      console.log(`Register error: ${error}`);
+    }
+    res = await database.query("SELECT * FROM users");
 
-      console.log(res.rows)
-    },
+    console.log(res.rows);
+
+    database.end();
+  },
 };
