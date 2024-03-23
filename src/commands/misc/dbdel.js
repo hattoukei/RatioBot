@@ -9,9 +9,8 @@ module.exports = {
   callback: async (client, interaction) => {
     const { Pool } = require("pg");
     const database = new Pool({
-      host: "localhost",
-      port: 5432,
-      database: "ratiodb",
+      database: process.env.PG_DB,
+      idleTimeoutMillis: 10000,
     });
 
     database.connect();
@@ -55,5 +54,7 @@ module.exports = {
     res = await database.query("SELECT * FROM users");
 
     console.log(res.rows);
+
+    database.end();
   },
 };

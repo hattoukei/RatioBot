@@ -11,7 +11,7 @@ module.exports = {
                 interaction.reply("nah fuck you");
                 break;
 
-            // Meows with a 1/100 chance.
+            // Meows with a 3% chance.
             case "meow":
                 random = Math.floor(Math.random() * 100);
                 console.log(`Meow rolled '${random}'`);

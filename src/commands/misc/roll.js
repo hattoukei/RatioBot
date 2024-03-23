@@ -2,7 +2,7 @@ module.exports = {
   name: "roll",
   description: "rolls some dice",
   // devOnly: true,
-  // testOnly: true,
+  testOnly: true,
   // options: Object[],
   // deleted: Boolean,
 

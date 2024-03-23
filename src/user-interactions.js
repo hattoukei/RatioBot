@@ -1,4 +1,4 @@
-const responses = require("../responses.json");
+const responses = require("./json/responses.json");
 const helper = require("./helper-functions.js");
 
 /*
