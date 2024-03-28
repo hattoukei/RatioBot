@@ -17,7 +17,7 @@ module.exports = {
                 interaction.reply("the ting go uwaaaa! >///< nya nya nya nya nya! :3");
                 break;
             case 3:
-                interaction.reply("the ting go uwaaaa! >///< nya nya nya nya nya! :3");
+                interaction.reply("rawr x3 *nuzzles* pounces on you uwu u so warm o3o");
                 break;
             default:
                 interaction.reply("What the fuck?");

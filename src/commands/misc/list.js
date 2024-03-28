@@ -20,7 +20,7 @@ module.exports = {
       `Attempting to access list of members initiated by '${user.username}'.`
     );
 
-    const list = new EmbedBuilder().setTitle("Member List");
+    const list = new EmbedBuilder().setTitle("Member List (use /bal for personal balance)");
 
     try {
       const query = {
@@ -29,7 +29,7 @@ module.exports = {
       let result = await database.query(query);
       let userList = "";
 
-      for (let i = 0; i < result.rows.length; i++) {
+      for (let i = 0; i < result.rows.length && i < 10; i++) {
         userList +=
           `${result.rows[i].username}: ${result.rows[i].coins} coins` + "\n";
       }
@@ -38,7 +38,7 @@ module.exports = {
     } catch (error) {
       console.log(`An error has occurred while displaying the list: ${error}.`);
     }
-
+    
     database.end();
   },
 };
