@@ -6,7 +6,7 @@ Linux Setup Installations:
 1. Installing NVM
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-nvm install <version>   // this case 21.7.1
+nvm install <version>     # this case 21.7.1
 npm install -g npm
 ```
 2. Install Dependencies
