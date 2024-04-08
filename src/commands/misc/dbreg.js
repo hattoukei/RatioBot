@@ -1,3 +1,5 @@
+const Balance = require("../../schemas/balance");
+
 module.exports = {
   name: "dbreg",
   description: "registers your uuid and name for the bot",
@@ -7,43 +9,39 @@ module.exports = {
   // deleted: Boolean,
 
   callback: async (client, interaction) => {
-    const { Pool } = require("pg");
-    const database = new Pool({
-      database: process.env.PG_DB,
-      idleTimeoutMillis: 10000,
-    });
-    database.connect();
-
     let user = interaction.user;
     console.log(`Attempting to register '${user.id}' as '${user.username}'.`);
 
-    let temp = await database.query(
-      `SELECT uuid FROM users WHERE ${user.id} = uuid`
-    );
+    const query = {
+      userId: interaction.user.id,
+      guildId: interaction.guild.id,
+    };
 
     try {
-      if (temp.rows.length === 0) {
-        const query1 = {
-          text: "INSERT INTO users (uuid, username) VALUES($1, $2)",
-          values: [user.id, user.username],
-        };
-        await database.query(query1);
+      const balance = await Balance.findOne(query);
 
-        const query2 = {
-          text: "INSERT INTO stats (uuid, coins) VALUES($1, $2)",
-          values: [user.id, 1000],
-        };
-        await database.query(query2);
+      // if user is already found in collection
+      if (balance) {
+        console.log(`UUID: ${user.id} has already been registered.`);
+        interaction.reply({
+          content: `You have already been registered.`,
+          ephemeral: true,
+        });
+      }
+
+      // if user is not found in collection
+      else {
+        const newBalance = new Balance({
+          userId: interaction.user.id,
+          guildId: interaction.guild.id,
+          userName: interaction.user.username,
+        });
+
+        await newBalance.save();
 
         console.log(`UUID: ${user.id} has successfuly been registered.`);
         interaction.reply({
           content: `You have been successfully registered! UUID: ${user.id}`,
-          ephemeral: true,
-        });
-      } else {
-        console.log(`UUID: ${user.id} has already been registered.`);
-        interaction.reply({
-          content: `You have already been registered.`,
           ephemeral: true,
         });
       }
@@ -54,10 +52,5 @@ module.exports = {
       });
       console.log(`Register error: ${error}`);
     }
-    res = await database.query("SELECT * FROM users");
-
-    console.log(res.rows);
-
-    database.end();
   },
 };

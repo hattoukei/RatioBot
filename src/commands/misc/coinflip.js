@@ -1,4 +1,5 @@
 const { ApplicationCommandOptionType } = require("discord.js");
+const Balance = require("../../schemas/balance");
 
 module.exports = {
   name: "cf",
@@ -14,108 +15,99 @@ module.exports = {
   ],
 
   callback: async (client, interaction) => {
-    // Database connection
-    const { Pool } = require("pg");
-    const database = new Pool({
-      database: process.env.PG_DB,
-      idleTimeoutMillis: 10000,
-    });
-
-    database.connect();
     let user = interaction.user;
     console.log(`'${user.username}' is gambling with a coinflip.`);
 
-    let temp = await database.query(
-      `SELECT uuid FROM users WHERE ${user.id} = uuid`
-    );
+    const query = {
+      userId: interaction.user.id,
+      guildId: interaction.guild.id,
+    };
 
-    if (temp.rows.length === 0) {
-      interaction.reply(
-        "You must first register your uuid using `/dbreg` before using this command."
-      );
-      return;
-    }
+    const playerBalance = await Balance.findOne(query);
 
     try {
-      let bet = interaction.options.get("bet").value;
-      let win = false;
-      let roll;
+      if (playerBalance) {
+        // Sets the player's bet value.
+        let bet = interaction.options.get("bet").value;
+        let coinsBefore = playerBalance.coins;
+        let win = false;
+        let roll;
 
-      let query = {
-        text: `SELECT coins FROM stats WHERE uuid = $1`,
-        values: [user.id],
-      };
+        // Checks if bet amount exceeds the user's balance. If so, exits.
+        if (bet > playerBalance.coins) {
+          console.log(
+            "Error: User attempted to bet more than their current balance."
+          );
+          interaction.reply({
+            content: `Sorry, you cannot bet ${bet} coins. Your balance is: ${playerBalance.coins}`,
+            ephemeral: true,
+          });
+          return;
+        }
 
-      const balance = await database.query(query);
-      console.log(balance.rows[0].coins, bet);
+        // Checks if bet is negative.
+        if (bet <= 0) {
+          console.log(`User attempted to enter a negative amount of coins.`);
+          interaction.reply({
+            content: `Sorry, you cannot bet ${bet} coins. Please choose a positive integer.`,
+            ephemeral: true,
+          });
+          return;
+        }
 
-      // Checks if bet amount exceeds the user's balance. If so, exits.
-      if (bet > balance.rows[0].coins) {
+        // Randomizes heads or tails if user did not select one.
+        roll = Math.floor(Math.random() * 100);
+        let response = "";
+        let sideroll = roll % 2;
+        console.log(roll);
+
+        // Special RNG case (10x rewards)
+        if (roll === 1) {
+          interaction.reply(
+            `The coin is standing on the rim. <@${user.id}> has won ${bet * 10} coins.`
+          );
+
+          playerBalance.coins += 10 * bet;
+
+          await playerBalance.save().catch((e) => {
+            console.log(`Error saving balance ${e}`);
+          });
+
+          return;
+        }
+
+        // Checks if user won the flip.
+        if (sideroll === 0) {
+          win = true;
+        }
+
+        // Calculates the user's balance.
+        if (win) {
+          playerBalance.coins += bet;
+          response += `<@${user.id}> has won ${bet} coins.`;
+        } else {
+          playerBalance.coins -= bet;
+          response += `<@${user.id}> has lost ${bet} coins.`;
+        }
+
+        interaction.reply(response);
+
+        // Saves the changes from above to the database
+        await playerBalance.save();
+
+        let coinsAfter = playerBalance.coins;
+
         console.log(
-          "Error: User attempted to bet more than their current balance."
+          `${playerBalance.userName}'s balance went from ${coinsBefore} -> ${coinsAfter}.`
         );
-        interaction.reply({
-          content: `Sorry, you cannot bet ${bet} coins. Your balance is: ${balance.rows[0].coins}`,
-          ephemeral: true,
-        });
-        return;
-      }
-
-      // Checks if bet is negative.
-      if (bet <= 0) {
-        console.log(`User attempted to enter a negative amount of coins.`);
-        interaction.reply({
-          content: `Sorry, you cannot bet ${bet} coins. Please choose a positive integer.`,
-          ephemeral: true,
-        });
-        return;
-      }
-
-      // Randomizes heads or tails if user did not select one.
-      roll = Math.floor(Math.random() * 100);
-      let response = "";
-      let sideroll = roll % 2;
-      console.log(roll);
-
-      // Special RNG case
-      if (roll === 1) {
-        interaction.reply(
-          `The coin is standing on the rim. You have won ${bet * 10} coins.`
-        );
-        let query = {
-          text: `UPDATE stats SET coins = coins + $2 * 10 WHERE uuid = $1`,
-          values: [user.id, bet],
-        };
-        await database.query(query);
-        return;
-      }
-
-      // Checks if user won the flip.
-      if (sideroll === 0) {
-        win = true;
-      }
-
-      if (win) {
-        let query = {
-          text: `UPDATE stats SET coins = coins + $2 WHERE uuid = $1`,
-          values: [user.id, bet],
-        };
-        await database.query(query);
-        response += `You have won ${bet} coins.`;
       } else {
-        let query = {
-          text: `UPDATE stats SET coins = coins - $2 WHERE uuid = $1`,
-          values: [user.id, bet],
-        };
-        await database.query(query);
-        response += `You have lost ${bet} coins.`;
+        interaction.reply(
+          "You must first register your uuid using `/dbreg` before using this command."
+        );
+        return;
       }
-
-      interaction.reply(response);
     } catch (error) {
       console.log(`Error has occurred: ${error}`);
     }
-
-    database.end();
   },
 };

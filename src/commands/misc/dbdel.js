@@ -1,3 +1,5 @@
+const Balance = require("../../schemas/balance");
+
 module.exports = {
   name: "dbdel",
   description: "deletes you from database",
@@ -7,30 +9,24 @@ module.exports = {
   // deleted: Boolean,
 
   callback: async (client, interaction) => {
-    const { Pool } = require("pg");
-    const database = new Pool({
-      database: process.env.PG_DB,
-      idleTimeoutMillis: 10000,
-    });
-
-    database.connect();
     let user = interaction.user;
     console.log(
       `Attempting to delete '${user.id}' as '${user.username}' from database.`
     );
 
-    let temp = await database.query(
-      `SELECT uuid FROM users WHERE ${user.id} = uuid`
-    );
+    const query = {
+      userId: interaction.user.id,
+      guildId: interaction.guild.id,
+    };
 
     try {
-      if (temp.rows.length === 1) {
-        const query = {
-          text: `DELETE FROM users WHERE uuid = ${user.id}`,
-        };
-        const res = await database.query(query);
+      const balance = await Balance.findOne(query);
 
+      if (balance) {
         console.log(`Deleting UUID '${user.id}' from database.`);
+
+        await balance.deleteOne({ _id: balance.id });
+
         interaction.reply({
           content: `Your UUID: ${user.id} has been successfully deleted`,
           ephemeral: true,
@@ -51,10 +47,5 @@ module.exports = {
         `There was an error deleting ${user.username} from the database: ${error}`
       );
     }
-    res = await database.query("SELECT * FROM users");
-
-    console.log(res.rows);
-
-    database.end();
   },
 };

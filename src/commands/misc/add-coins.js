@@ -1,4 +1,5 @@
 const { ApplicationCommandOptionType } = require("discord.js");
+const Balance = require("../../schemas/balance");
 
 module.exports = {
   name: "add-coins",
@@ -21,45 +22,49 @@ module.exports = {
   ],
 
   callback: async (client, interaction) => {
-    const { Pool } = require("pg");
-    const database = new Pool({
-      database: process.env.PG_DB,
-    });
-
-    database.connect();
     let user = interaction.user;
-    console.log(`'${user.username}' is gambling with a coinflip.`);
+    console.log(`'${user.username}' is adding coins to player.`);
 
     const targetUser = interaction.options.get("user").value;
     const amount = interaction.options.get("amount").value;
 
+    const query = {
+      userId: targetUser,
+    };
+
     try {
-      const query = {
-        text: `UPDATE stats SET coins = coins + $1 WHERE uuid = $2`,
-        values: [amount, targetUser],
-      };
-      database.query(query);
+      const balance = await Balance.findOne(query);
 
-      const query2 = {
-        text: `SELECT coins FROM stats WHERE uuid = $1`,
-        values: [targetUser],
-      };
-      let result = await database.query(query2);
-      let coinsAfter = result.rows[0].coins;
+      if (balance) {
+        let coinsBefore = balance.coins;
 
-      if (coinsAfter < 0) {
-        const query = {
-          text: `UPDATE stats SET coins = 0 WHERE uuid = $1`,
-          values: [targetUser],
-        };
-        await database.query(query);
+        balance.coins += amount;
+
+        let coinsAfter = balance.coins;
+
+        // if balance goes to negatives, set to 0.
+        if (coinsAfter < 0) {
+          balance.coins = 0;
+        }
+
+        await balance.save().catch((e) => {
+          console.log(`Error adding balance: ${e}`);
+        });
+
+        interaction.reply(
+          `Successfully added ${amount} coins to ${balance.userName}.`
+        );
+
+        console.log(
+          `Coins for ${balance.userName} went from ${coinsBefore} -> ${coinsAfter}.`
+        );
+      } else {
+        interaction.reply(`This player is not recorded in the database.`);
       }
-      interaction.reply(`Successfully added ${amount} coins.`);
     } catch (error) {
       console.log(
         `There was an error attempting to add coins to the player: ${error}`
       );
     }
-    database.end();
   },
 };

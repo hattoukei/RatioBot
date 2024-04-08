@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
+const Balance = require("../../schemas/balance");
 
 module.exports = {
   name: "list",
@@ -9,36 +10,38 @@ module.exports = {
   // deleted: Boolean,
 
   callback: async (client, interaction) => {
-    const { Pool } = require("pg");
-    const database = new Pool({
-      database: process.env.PG_DB,
-    });
-    database.connect();
-
     let user = interaction.user;
     console.log(
       `Attempting to access list of members initiated by '${user.username}'.`
     );
 
-    const list = new EmbedBuilder().setTitle("Member List (use /bal for personal balance)");
+    const list = new EmbedBuilder().setTitle(
+      "Member List (use /bal for personal balance)"
+    );
 
     try {
-      const query = {
-        text: `SELECT users.username, coins FROM stats INNER JOIN users USING (uuid) ORDER BY coins desc`,
-      };
-      let result = await database.query(query);
+      let userCount = await Balance.find().countDocuments();
       let userList = "";
 
-      for (let i = 0; i < result.rows.length && i < 10; i++) {
-        userList +=
-          `${result.rows[i].username}: ${result.rows[i].coins} coins` + "\n";
-      }
-      list.addFields({ name: "members:", value: userList });
-      interaction.reply({ embeds: [list] });
+      console.log(userCount);
+
+      // Uses a cursor to iterate through the collection.
+      const cursor = Balance.find().sort({ coins: -1 }).cursor({ limit: 10 });
+
+      cursor.on("data", (user) => {
+        userList += `${user.userName}: ${user.coins} coins` + "\n";
+      });
+
+      cursor.on("error", (err) => {
+        console.error("Error iterating:", err);
+      });
+
+      cursor.on("end", () => {
+        list.addFields({ name: "members:", value: userList });
+        interaction.reply({ embeds: [list] });
+      });
     } catch (error) {
       console.log(`An error has occurred while displaying the list: ${error}.`);
     }
-    
-    database.end();
   },
 };
