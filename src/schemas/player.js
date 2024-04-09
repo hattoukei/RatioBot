@@ -18,9 +18,14 @@ const playerSchema = new Schema({
     type: Number,
     default: 0,
   },
+  power: {
+    type: Number,
+    default: 0,
+  },
   weight: {
     type: mineWeight,
   },
+  inventory: [],
 });
 
 // Returns total weight

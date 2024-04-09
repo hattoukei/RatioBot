@@ -15,6 +15,19 @@ run();
 async function run() {
   const find = await Player.findOne({ userId: "310812771971235841" });
   if (find) {
+    console.log(find);
+    console.log("Player is registered!");
+  } else {
+    console.log(`User not found.`);
+  }
+  console.log("Finished!");
+  process.exit(0);
+}
+
+/*
+async function run() {
+  const find = await Player.findOne({ userId: "310812771971235841" });
+  if (find) {
     console.log("Player is already found.");
 
     find.weight.bedrock += 1;
@@ -48,3 +61,4 @@ async function run() {
   console.log("Finished!");
   process.exit(0);
 }
+*/
