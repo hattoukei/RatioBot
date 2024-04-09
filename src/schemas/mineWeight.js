@@ -10,35 +10,35 @@ const { Schema, model } = require("mongoose");
 const mineWeightSchema = new Schema({
   wood: {
     type: Number,
-    default: 1,
+    default: 45,
   },
   stone: {
     type: Number,
-    default: 0,
+    default: 175,
   },
   coal: {
     type: Number,
-    default: 0,
+    default: 115,
   },
   iron: {
     type: Number,
-    default: 0,
+    default: 65,
   },
   gold: {
     type: Number,
-    default: 0,
+    default: 30,
   },
   diamond: {
     type: Number,
-    default: 0,
+    default: 5,
   },
   emerald: {
     type: Number,
-    default: 0,
+    default: 2,
   },
   bedrock: {
     type: Number,
-    default: 0,
+    default: 1,
   },
 });
 

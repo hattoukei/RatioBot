@@ -39,22 +39,22 @@ playerSchema.methods.findTotalWeight = function () {
 
 playerSchema.methods.findWeightValues = function () {
   return [
-    { name: "wood", weight: this.weight.wood, minValue: 1, maxValue: 5 },
-    { name: "stone", weight: this.weight.stone, minValue: 5, maxValue: 10 },
-    { name: "coal", weight: this.weight.coal, minValue: 15, maxValue: 30 },
-    { name: "iron", weight: this.weight.iron, minValue: 50, maxValue: 100 },
-    { name: "gold", weight: this.weight.gold, minValue: 125, maxValue: 250 },
+    { name: "wood", weight: this.weight.wood, minValue: 5, maxValue: 15 },
+    { name: "stone", weight: this.weight.stone, minValue: 10, maxValue: 25 },
+    { name: "coal", weight: this.weight.coal, minValue: 15, maxValue: 35 },
+    { name: "iron", weight: this.weight.iron, minValue: 30, maxValue: 75 },
+    { name: "gold", weight: this.weight.gold, minValue: 60, maxValue: 125 },
     {
       name: "diamond",
       weight: this.weight.diamond,
-      minValue: 500,
-      maxValue: 1000,
+      minValue: 185,
+      maxValue: 325,
     },
     {
       name: "emerald",
       weight: this.weight.emerald,
-      minValue: 1000,
-      maxValue: 2500,
+      minValue: 450,
+      maxValue: 3275,
     },
     {
       name: "bedrock",

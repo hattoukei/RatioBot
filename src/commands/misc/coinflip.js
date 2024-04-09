@@ -1,5 +1,5 @@
 const { ApplicationCommandOptionType } = require("discord.js");
-const Balance = require("../../schemas/balance");
+const Player = require("../../schemas/player.js");
 
 module.exports = {
   name: "cf",
@@ -23,7 +23,7 @@ module.exports = {
       guildId: interaction.guild.id,
     };
 
-    const playerBalance = await Balance.findOne(query);
+    const playerBalance = await Player.findOne(query);
 
     try {
       if (playerBalance) {

@@ -15,7 +15,7 @@ module.exports = {
 
     if (cooldowns.has(interaction.user.id)) {
       interaction.reply({
-        content: `You are currently on a cooldown.`,
+        content: `You are currently on a cooldown. You can only mine once every 15 seconds.`,
         ephemeral: true,
       });
       return;
@@ -60,6 +60,12 @@ module.exports = {
         console.log(
           `    Coins for ${player.userName} went from ${coinsBefore} -> ${coinsAfter}.`
         );
+
+        // Handles timers
+        cooldowns.add(interaction.user.id);
+        setTimeout(() => {
+          cooldowns.delete(interaction.user.id);
+        }, 15000);
       } else {
         interaction.reply({
           content: `This player is not recorded in the database.`,
