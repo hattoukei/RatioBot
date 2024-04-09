@@ -1,0 +1,15 @@
+{
+  "pickaxes": [
+    {
+      "name": "Fists",
+      "power": 1,
+      "cost": 0,
+      "mineWeight": [
+        {
+          "ore": "Wood",
+          "weight": "1"
+        }
+      ]
+    }
+  ]
+}

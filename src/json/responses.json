@@ -1,180 +1,180 @@
 {
-    "validUsers": [
+  "validUsers": [
+    {
+      "uuid": "310812771971235841",
+      "nickname": "Salted",
+      "interaction": [
         {
-            "uuid": "310812771971235841",
-            "nickname": "Salted",
-            "interaction": [
-                {
-                    "content": "hi."
-                }
-            ]
-        },
-        {
-            "uuid": "401243773834887169",
-            "nickname": "Ushi",
-            "interaction": [
-                {
-                    "content": "grogas."
-                },
-                {
-                    "content": "you are NOT the god killer."
-                },
-                {
-                    "content": "scuba gragas."
-                },
-                {
-                    "content": "malevolent kitchen."
-                }
-            ]
-        },
-        {
-            "uuid": "508122760644395009",
-            "nickname": "the hater",
-            "interaction": [
-                {
-                    "content": "You are like a primitive version of me, except you are racist.\nAlso:\nhttps://www.op.gg/summoners/na/OmlitD-NA1/matches/RvuDQoxvmIJG923-34PgH4t2b7h0jKssqEoBIWzr6HE%3D/1709951892000\nhttps://iaace-na.github.io/lol-match-stats-viewer/?match=https%3A%2F%2Frewind.lol%2Fgetmatch%2FNA%2F4794143099%2Fstats",
-                    "files": [{ "attachment": "src/images/yone1.png" }]
-                }
-            ]
-        },
-        {
-            "uuid": "360925236243202059",
-            "nickname": "the complainer",
-            "interaction": [
-                {
-                    "content": "Please, don't ever talk to me again. Also:",
-                    "files": [{ "attachment": "src/images/ohgodno1.png" }]
-                }
-            ]
-        },
-        {
-            "uuid": "736824696271667300",
-            "nickname": "Hdeth",
-            "interaction": [
-                {
-                    "content": "Mind if we grab a cup of tea later this evening, Hdeth?"
-                }
-            ]
-        },
-        {
-            "uuid": "446502936076615691",
-            "nickname": "Darth Fetus",
-            "interaction": [
-                {
-                    "content": "Wait... I've seen you before. Your ass ran it down 26 deaths in my game a few days ago.\nhttps://iaace-na.github.io/lol-match-stats-viewer/?match=https%3A%2F%2Frewind.lol%2Fgetmatch%2FNA%2F4911615208%2Fstats",
-                    "files": [{ "attachment": "src/images/nunu1.png" }]
-                }
-            ]
-        },
-        {
-            "uuid": "302224088540119040",
-            "nickname": "DatOneGuy",
-            "interaction": [
-                {
-                    "content": "I'm using you as a default case. <@310812771971235841>"
-                }
-            ]
-        },
-        {
-            "uuid": "338494874556825600",
-            "nickname": "Bell",
-            "interaction": [
-                {
-                    "content": "John Cena?"
-                }
-            ]
-        },
-        {
-            "uuid": "548283585602387969",
-            "nickname": "ResiRess",
-            "interaction": [
-                { 
-                    "content": "How many Bronyas did you get again?"
-                }
-            ]
-        },
-        {
-            "uuid": "378601199630286860",
-            "nickname": "LabGrownHomie",
-            "interaction": [
-                { 
-                    "content": "Hello Arlan enjoyer."
-                }
-            ]
+          "content": "hi."
         }
-    ],
-    "validSubstring": [
+      ]
+    },
+    {
+      "uuid": "401243773834887169",
+      "nickname": "Ushi",
+      "interaction": [
         {
-            "substring": "fuck you",
-            "interaction": [
-                {
-                    "content": "fuck you too."
-                }
-            ]
+          "content": "grogas."
         },
         {
-            "substring": "fuck off",
-            "interaction": [
-                {
-                    "content": "nah."
-                }
-            ]
+          "content": "you are NOT the god killer."
         },
         {
-            "substring": "kys",
-            "interaction": [
-                {
-                    "content": "mean."
-                }
-            ]
+          "content": "scuba gragas."
         },
         {
-            "substring": "do you play",
-            "interaction": [
-                {
-                    "content": "I will not belittle myself to play these so called 'games'."
-                }
-            ]
-        },
-        {
-            "substring": "anthony",
-            "interaction": [
-                {
-                    "content": "Please never mention this name again."
-                }
-            ]
-        },
-        {
-            "substring": "sparkle",
-            "interaction": [
-                {
-                    "content": "I am elation!"
-                }
-            ]
-        },
-        {
-            "substring": "primitive",
-            "interaction": [
-                {
-                    "content": "Who?"
-                }
-            ]
-        },
-        {
-            "substring": "mahoraga",
-            "interaction": [
-                {
-                    "files": [{ "attachment": "src/images/mahoraga.png"  }]
-                }
-            ]
-        },
-        {
-            "substring": "firefly",
-            "interaction": [
-                {
-                    "files": [{ "attachment": "src/images/ffcope.jpeg"  }]
-                }
-            ]
+          "content": "malevolent kitchen."
         }
-    ]
+      ]
+    },
+    {
+      "uuid": "508122760644395009",
+      "nickname": "the hater",
+      "interaction": [
+        {
+          "content": "You are like a primitive version of me, except you are racist.\nAlso:\nhttps://www.op.gg/summoners/na/OmlitD-NA1/matches/RvuDQoxvmIJG923-34PgH4t2b7h0jKssqEoBIWzr6HE%3D/1709951892000\nhttps://iaace-na.github.io/lol-match-stats-viewer/?match=https%3A%2F%2Frewind.lol%2Fgetmatch%2FNA%2F4794143099%2Fstats",
+          "files": [{ "attachment": "src/images/yone1.png" }]
+        }
+      ]
+    },
+    {
+      "uuid": "360925236243202059",
+      "nickname": "the complainer",
+      "interaction": [
+        {
+          "content": "Please, don't ever talk to me again. Also:",
+          "files": [{ "attachment": "src/images/ohgodno1.png" }]
+        }
+      ]
+    },
+    {
+      "uuid": "736824696271667300",
+      "nickname": "Hdeth",
+      "interaction": [
+        {
+          "content": "Mind if we grab a cup of tea later this evening, Hdeth?"
+        }
+      ]
+    },
+    {
+      "uuid": "446502936076615691",
+      "nickname": "Darth Fetus",
+      "interaction": [
+        {
+          "content": "Wait... I've seen you before. Your ass ran it down 26 deaths in my game a few days ago.\nhttps://iaace-na.github.io/lol-match-stats-viewer/?match=https%3A%2F%2Frewind.lol%2Fgetmatch%2FNA%2F4911615208%2Fstats",
+          "files": [{ "attachment": "src/images/nunu1.png" }]
+        }
+      ]
+    },
+    {
+      "uuid": "302224088540119040",
+      "nickname": "DatOneGuy",
+      "interaction": [
+        {
+          "content": "I'm using you as a default case. <@310812771971235841>"
+        }
+      ]
+    },
+    {
+      "uuid": "338494874556825600",
+      "nickname": "Bell",
+      "interaction": [
+        {
+          "content": "John Cena?"
+        }
+      ]
+    },
+    {
+      "uuid": "548283585602387969",
+      "nickname": "ResiRess",
+      "interaction": [
+        {
+          "content": "How many Bronyas did you get again?"
+        }
+      ]
+    },
+    {
+      "uuid": "378601199630286860",
+      "nickname": "LabGrownHomie",
+      "interaction": [
+        {
+          "content": "Hello Arlan enjoyer."
+        }
+      ]
+    }
+  ],
+  "validSubstring": [
+    {
+      "substring": "fuck you",
+      "interaction": [
+        {
+          "content": "fuck you too."
+        }
+      ]
+    },
+    {
+      "substring": "fuck off",
+      "interaction": [
+        {
+          "content": "nah."
+        }
+      ]
+    },
+    {
+      "substring": "kys",
+      "interaction": [
+        {
+          "content": "mean."
+        }
+      ]
+    },
+    {
+      "substring": "do you play",
+      "interaction": [
+        {
+          "content": "I will not belittle myself to play these so called 'games'."
+        }
+      ]
+    },
+    {
+      "substring": "anthony",
+      "interaction": [
+        {
+          "content": "Please never mention this name again."
+        }
+      ]
+    },
+    {
+      "substring": "sparkle",
+      "interaction": [
+        {
+          "content": "I am elation!"
+        }
+      ]
+    },
+    {
+      "substring": "primitive",
+      "interaction": [
+        {
+          "content": "Who?"
+        }
+      ]
+    },
+    {
+      "substring": "mahoraga",
+      "interaction": [
+        {
+          "files": [{ "attachment": "src/images/mahoraga.png" }]
+        }
+      ]
+    },
+    {
+      "substring": "firefly",
+      "interaction": [
+        {
+          "files": [{ "attachment": "src/images/ffcope.jpeg" }]
+        }
+      ]
+    }
+  ]
 }
