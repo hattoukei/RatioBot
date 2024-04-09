@@ -1,5 +1,5 @@
 const { ApplicationCommandOptionType } = require("discord.js");
-const Balance = require("../../schemas/balance");
+const Player = require("../../schemas/player");
 
 module.exports = {
   name: "add-coins",
@@ -33,7 +33,7 @@ module.exports = {
     };
 
     try {
-      const balance = await Balance.findOne(query);
+      const balance = await Player.findOne(query);
 
       if (balance) {
         let coinsBefore = balance.coins;

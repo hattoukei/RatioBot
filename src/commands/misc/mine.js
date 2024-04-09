@@ -68,7 +68,7 @@ module.exports = {
         }, 15000);
       } else {
         interaction.reply({
-          content: `This player is not recorded in the database.`,
+          content: `You must register using /dbreg before using this command.`,
           ephemeral: true,
         });
       }

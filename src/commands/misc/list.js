@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const Balance = require("../../schemas/balance");
+const Player = require("../../schemas/player");
 
 module.exports = {
   name: "list",
@@ -20,13 +20,13 @@ module.exports = {
     );
 
     try {
-      let userCount = await Balance.find().countDocuments();
+      let userCount = await Player.find().countDocuments();
       let userList = "";
 
       console.log(userCount);
 
       // Uses a cursor to iterate through the collection.
-      const cursor = Balance.find().sort({ coins: -1 }).cursor({ limit: 10 });
+      const cursor = Player.find().sort({ coins: -1 }).cursor({ limit: 10 });
 
       cursor.on("data", (user) => {
         userList += `${user.userName}: ${user.coins} coins` + "\n";
