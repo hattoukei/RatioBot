@@ -42,8 +42,7 @@
       "nickname": "the complainer",
       "interaction": [
         {
-          "content": "Please, don't ever talk to me again. Also:",
-          "files": [{ "attachment": "src/images/ohgodno1.png" }]
+          "content": "Please, don't ever talk to me again."
         }
       ]
     },
