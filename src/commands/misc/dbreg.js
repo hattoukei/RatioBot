@@ -1,4 +1,4 @@
-const Balance = require("../../schemas/balance");
+const Player = require("../../schemas/player");
 
 module.exports = {
   name: "dbreg",
@@ -18,10 +18,10 @@ module.exports = {
     };
 
     try {
-      const balance = await Balance.findOne(query);
+      const player = await Player.findOne(query);
 
       // if user is already found in collection
-      if (balance) {
+      if (player) {
         console.log(`UUID: ${user.id} has already been registered.`);
         interaction.reply({
           content: `You have already been registered.`,
@@ -31,13 +31,17 @@ module.exports = {
 
       // if user is not found in collection
       else {
-        const newBalance = new Balance({
+        const newPlayer = await Player.create({
           userId: interaction.user.id,
           guildId: interaction.guild.id,
           userName: interaction.user.username,
+          coins: 0,
+          weight: {
+            wood: 10,
+          },
         });
 
-        await newBalance.save();
+        await newPlayer.save();
 
         console.log(`UUID: ${user.id} has successfuly been registered.`);
         interaction.reply({

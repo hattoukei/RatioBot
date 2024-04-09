@@ -1,6 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const Balance = require("../../schemas/balance");
-const randomNum = require("../../utils/generateRandomNumber");
+const Player = require("../../schemas/player");
 
 module.exports = {
   name: "bal",
@@ -14,14 +13,13 @@ module.exports = {
     let user = interaction.user;
     console.log(`'${user.username}' is attempting to look at their balance.`);
 
+    // Query to find user
     const query = {
       userId: interaction.user.id,
-      guildId: interaction.guild.id,
     };
 
     try {
-      console.log(randomNum(3, 10));
-      const playerBalance = await Balance.findOne(query);
+      const playerBalance = await Player.findOne(query);
 
       if (playerBalance) {
         const embed = new EmbedBuilder().setTitle(

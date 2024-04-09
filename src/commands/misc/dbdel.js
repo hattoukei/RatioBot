@@ -1,9 +1,9 @@
-const Balance = require("../../schemas/balance");
+const Player = require("../../schemas/player");
 
 module.exports = {
   name: "dbdel",
   description: "deletes you from database",
-  // devOnly: Boolean,
+  devOnly: true,
   testOnly: true,
   // options: Object[],
   // deleted: Boolean,
@@ -20,12 +20,12 @@ module.exports = {
     };
 
     try {
-      const balance = await Balance.findOne(query);
+      const player = await Player.findOne(query);
 
-      if (balance) {
+      if (player) {
         console.log(`Deleting UUID '${user.id}' from database.`);
 
-        await balance.deleteOne({ _id: balance.id });
+        await player.deleteOne({ _id: player.id });
 
         interaction.reply({
           content: `Your UUID: ${user.id} has been successfully deleted`,

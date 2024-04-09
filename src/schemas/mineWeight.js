@@ -1,20 +1,45 @@
+const { Schema, model } = require("mongoose");
+
+/**
+ * Determines the mine weight for a player or item.
+ *  The name serves as an individual identifier for the schema. (as some of these Schemas may not include certain ores.)
+ *  If player, then this should be attached to a player's mineWeight property, and defines their weight to mine a certain ore.
+ *  If item, then this should be attached to an item's mineWeight property, and serves as additional weight changes to a player's mineWeight.
+ */
+
 const mineWeightSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
+  wood: {
+    type: Number,
+    default: 1,
   },
-  guildId: {
-    type: String,
-    required: true,
+  stone: {
+    type: Number,
+    default: 0,
   },
-  userName: {
-    type: String,
-    required: true,
+  coal: {
+    type: Number,
+    default: 0,
   },
-  coins: {
+  iron: {
+    type: Number,
+    default: 0,
+  },
+  gold: {
+    type: Number,
+    default: 0,
+  },
+  diamond: {
+    type: Number,
+    default: 0,
+  },
+  emerald: {
+    type: Number,
+    default: 0,
+  },
+  bedrock: {
     type: Number,
     default: 0,
   },
 });
 
-module.exports = model("balance", balanceSchema);
+module.exports = mineWeightSchema;
