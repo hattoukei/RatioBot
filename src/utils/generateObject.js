@@ -76,11 +76,20 @@ async function updatePlayers() {
     const players = await Player.find();
     for (const player of players) {
       // player.power = 0;
+
       // player.inventory = [0];
+
       // player.rank = { level: 0, name: "F", cost: 0 };
-      for (let i = 0; i < weights.length; i++) {
-        player.weightModifiers.push({ flat: weights[i], multiplier: 1 });
-      }
+
+      // for (let i = 0; i < weights.length; i++) {
+      //   player.weightModifiers.push({ flat: weights[i], multiplier: 1 });
+      // }
+
+      player.fun.rpsCount = 0;
+      player.fun.rpsWins = 0;
+      player.fun.rpsLosses = 0;
+      player.fun.rpsTies = 0;
+
       await player.save();
     }
     console.log(`Successfully updated all players!`);

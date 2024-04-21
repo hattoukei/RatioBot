@@ -43,6 +43,24 @@ const playerSchema = new Schema({
       },
     },
   ],
+  fun: {
+    rpsCount: {
+      type: Number,
+      default: 0,
+    },
+    rpsWins: {
+      type: Number,
+      default: 0,
+    },
+    rpsLosses: {
+      type: Number,
+      default: 0,
+    },
+    rpsTies: {
+      type: Number,
+      default: 0,
+    },
+  },
   inventory: [
     {
       type: [Number],

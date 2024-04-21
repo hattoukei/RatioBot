@@ -19,11 +19,11 @@ module.exports = {
     };
 
     try {
-      const playerBalance = await Player.findOne(query);
+      const player = await Player.findOne(query);
 
-      if (playerBalance) {
+      if (player) {
         const embed = new EmbedBuilder().setTitle(
-          `${user.username}'s balance: ${playerBalance.coins} coins.`
+          `[${player.rank}] ${user.username}'s balance: ${player.coins} coins.`
         );
 
         interaction.reply({ embeds: [embed], ephemeral: true });
