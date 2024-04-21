@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const Ore = require("./ores").schema;
 
 /**
  * Determines the mine weight for a player or item.
@@ -8,19 +7,19 @@ const Ore = require("./ores").schema;
  *  If item, then this should be attached to an item's mineWeight property, and serves as additional weight changes to a player's mineWeight.
  */
 
-const mineWeightSchema = new Schema({
-  isBase: {
-    type: Boolean,
-    default: false,
-  },
-  ore: {
-    type: Ore,
+const mineRankSchema = new Schema({
+  level: {
+    type: Number,
     required: true,
   },
-  weightValue: {
+  name: {
+    type: String,
+    required: true,
+  },
+  cost: {
     type: Number,
     default: 0,
   },
 });
 
-module.exports = model("mineWeight", mineWeightSchema);
+module.exports = model("mineRank", mineRankSchema);

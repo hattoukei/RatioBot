@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const Player = require("../../schemas/player");
+const Ranks = require("../../schemas/mineRanks");
 
 module.exports = {
   name: "list",
@@ -29,7 +30,8 @@ module.exports = {
       const cursor = Player.find().sort({ coins: -1 }).cursor({ limit: 10 });
 
       cursor.on("data", (user) => {
-        userList += `${user.userName}: ${user.coins} coins` + "\n";
+        userList +=
+          `[${user.rank}] ${user.userName}: ${user.coins} coins` + "\n";
       });
 
       cursor.on("error", (err) => {

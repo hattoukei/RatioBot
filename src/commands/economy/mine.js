@@ -1,4 +1,5 @@
 const Player = require("../../schemas/player");
+const Ores = require("../../schemas/ores");
 const randomNum = require("../../utils/generateRandomNumber");
 const cooldowns = new Set();
 
@@ -15,7 +16,7 @@ module.exports = {
 
     if (cooldowns.has(interaction.user.id)) {
       interaction.reply({
-        content: `You are currently on a cooldown. You can only mine once every 15 seconds.`,
+        content: `You are currently on a cooldown. You can only mine once every 5 seconds.`,
         ephemeral: true,
       });
       return;
@@ -39,8 +40,9 @@ module.exports = {
         const totalWeight = await player.findTotalWeight();
 
         // Starts the roll for the ore
-        const ore = rollOre(weightTable, totalWeight);
-        let amount = randomNum(ore.minValue, ore.maxValue);
+        const oreName = rollOre(weightTable, totalWeight);
+        const targetOre = await Ores.findOne({ name: oreName });
+        let amount = randomNum(targetOre.minValue, targetOre.maxValue);
 
         // Adds and saves coin amount to player.
         player.coins += amount;
@@ -54,7 +56,7 @@ module.exports = {
         });
 
         interaction.reply(
-          `<@${interaction.user.id}> Successfully mined a ${ore.name} ore! You gained ${amount} coins!`
+          `<@${interaction.user.id}> Successfully mined a ${targetOre.name} ore! You gained ${amount} coins!`
         );
 
         console.log(
@@ -62,10 +64,14 @@ module.exports = {
         );
 
         // Handles timers
-        cooldowns.add(interaction.user.id);
-        setTimeout(() => {
-          cooldowns.delete(interaction.user.id);
-        }, 15000);
+        if (interaction.user.id === "310812771971235841") {
+          console.log(`Dev spotted. Timer will not be invoked.`);
+        } else {
+          cooldowns.add(interaction.user.id);
+          setTimeout(() => {
+            cooldowns.delete(interaction.user.id);
+          }, 5000);
+        }
       } else {
         interaction.reply({
           content: `You must register using /dbreg before using this command.`,
@@ -73,7 +79,7 @@ module.exports = {
         });
       }
     } catch (error) {
-      console.log(`There was an error attempting to mine: ${error}`);
+      console.log(`There was an error attempting to mine: ${error.stack}`);
     }
   },
 };
@@ -81,12 +87,13 @@ module.exports = {
 function rollOre(table, weight) {
   const roll = Math.floor(Math.random() * weight);
   let accumulatedWeight = 0;
+  console.log(table);
 
   console.log(`    Rolled: ${roll} out of ${weight}!`);
   for (const ore of table) {
     accumulatedWeight += ore.weight;
     if (accumulatedWeight >= roll) {
-      return ore;
+      return ore.name;
     }
   }
   return table[table.length - 1];

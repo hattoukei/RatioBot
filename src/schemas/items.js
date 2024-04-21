@@ -10,4 +10,4 @@ const itemSchema = new Schema({
   },
 });
 
-module.exports = model("items", itemSchema);
+module.exports = itemSchema;

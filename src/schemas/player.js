@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const mineWeight = require("./mineWeight.js");
+const mineRank = require("./mineRanks.js");
 
 const playerSchema = new Schema({
   userId: {
@@ -22,52 +23,78 @@ const playerSchema = new Schema({
     type: Number,
     default: 0,
   },
-  weight: {
-    type: mineWeight,
+  rankLevel: {
+    type: Number,
+    default: 0,
   },
-  inventory: [],
+  rank: {
+    type: String,
+    default: "F",
+  },
+  weightModifiers: [
+    {
+      flat: {
+        type: mineWeight.schema,
+        default: () => ({}),
+      },
+      multiplier: {
+        type: Number,
+        default: 1,
+      },
+    },
+  ],
+  inventory: [
+    {
+      type: [Number],
+      default: [0],
+    },
+  ],
 });
 
 // Returns total weight
-playerSchema.methods.findTotalWeight = function () {
-  return (
-    this.weight.wood +
-    this.weight.stone +
-    this.weight.coal +
-    this.weight.iron +
-    this.weight.gold +
-    this.weight.diamond +
-    this.weight.emerald +
-    this.weight.bedrock
-  );
+playerSchema.methods.findTotalWeight = async function () {
+  let count = 0;
+  for (const object of this.weightModifiers) {
+    count += object.flat.weightValue;
+  }
+  return count;
 };
 
-playerSchema.methods.findWeightValues = function () {
-  return [
-    { name: "wood", weight: this.weight.wood, minValue: 5, maxValue: 15 },
-    { name: "stone", weight: this.weight.stone, minValue: 10, maxValue: 25 },
-    { name: "coal", weight: this.weight.coal, minValue: 15, maxValue: 35 },
-    { name: "iron", weight: this.weight.iron, minValue: 30, maxValue: 75 },
-    { name: "gold", weight: this.weight.gold, minValue: 60, maxValue: 125 },
-    {
-      name: "diamond",
-      weight: this.weight.diamond,
-      minValue: 185,
-      maxValue: 325,
-    },
-    {
-      name: "emerald",
-      weight: this.weight.emerald,
-      minValue: 450,
-      maxValue: 3275,
-    },
-    {
-      name: "bedrock",
-      weight: this.weight.bedrock,
-      minValue: 10000,
-      maxValue: 10000,
-    },
-  ];
+// Returns list of objects as {name, weight}.
+playerSchema.methods.findWeightValues = async function () {
+  let ores = [];
+  let modifiers = [];
+
+  for (const object of this.weightModifiers) {
+    ores.push({
+      name: object.flat.ore.name,
+      weight: object.flat.weightValue,
+    });
+    modifiers.push(object.multiplier);
+  }
+
+  return ores;
+};
+
+playerSchema.methods.findNextRank = async function () {
+  const targetRank = await mineRank.findOne({ level: this.rankLevel + 1 });
+  if (targetRank) {
+    return targetRank;
+  } else {
+    return null;
+  }
+};
+
+playerSchema.methods.findRankCostNeeded = async function () {
+  const targetRank = await mineRank.findOne({ level: this.rankLevel + 1 });
+  if (targetRank) {
+    const coinsNeeded = targetRank.cost - this.coins;
+    if (coinsNeeded > 0) {
+      return coinsNeeded;
+    } else {
+      return -1;
+    }
+  }
 };
 
 module.exports = model("player", playerSchema);
