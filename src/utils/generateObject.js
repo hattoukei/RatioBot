@@ -85,10 +85,10 @@ async function updatePlayers() {
       //   player.weightModifiers.push({ flat: weights[i], multiplier: 1 });
       // }
 
-      player.fun.rpsCount = 0;
-      player.fun.rpsWins = 0;
-      player.fun.rpsLosses = 0;
-      player.fun.rpsTies = 0;
+      // player.fun.rpsCount = 0;
+      // player.fun.rpsWins = 0;
+      // player.fun.rpsLosses = 0;
+      // player.fun.rpsTies = 0;
 
       await player.save();
     }
@@ -114,15 +114,21 @@ async function updateMineRanks(mineRanks) {
   }
 }
 
-async function run() {
-  const find = await Player.findOne({ userId: "310812771971235841" });
-  if (find) {
-    console.log("Player is registered!");
-  } else {
-    console.log(`User not found.`);
-  }
-  console.log("Finished!");
+async function updateTargetPlayer() {
+  try {
+    const player = await Player.findOne({ userName: "tensofu" });
+    player.rankLevel = 0;
+    player.rank = "F";
 
+    await player.save();
+    console.log(`Successfully updated player!`);
+  } catch (error) {
+    console.log(`Error when updating player: ${error.stack}`);
+  }
+}
+
+async function updateSchemas() {
+  // Schemas
   const ranks = [
     { level: 0, name: "F", cost: 0 },
     { level: 1, name: "D", cost: 2500 },
@@ -160,19 +166,19 @@ async function run() {
     { name: "bedrock", weight: 1 },
   ];
 
-  await updatePlayers();
+  await updateMineRanks(ranks);
+  console.log(`Successfully updated ranks to mineRank Schema!`);
 
-  // await updateMineRanks(ranks);
-  // console.log(`Successfully updated ranks to mineRank Schema!`);
+  await updateOreList(ores);
+  console.log("Finished adding ores to Ore Schema!");
 
-  // await updateOreList(ores);
-  // console.log("Finished adding ores to Ore Schema!");
+  await updateBaseWeights(bases);
+  console.log("Finished adding base weights to mineWeight Schema!");
+}
 
-  // await updateBaseWeights(bases);
-  // console.log("Finished adding base weights to mineWeight Schema!");
-
+async function run() {
   // await updatePlayers();
-  // console.log(`Successfully updated all players with new defaults.`);
+  // await updateTargetPlayer();
 
   process.exit(0);
 }
