@@ -36,10 +36,13 @@ module.exports = {
           guildId: interaction.guild.id,
           userName: interaction.user.username,
           coins: 0,
-          weight: {
-            wood: 10,
-          },
         });
+
+        const weights = await mineWeight.find({ isBase: "true" });
+
+        for (let i = 0; i < weights.length; i++) {
+          newPlayer.weightModifiers.push({ flat: weights[i], multiplier: 1 });
+        }
 
         await newPlayer.save();
 

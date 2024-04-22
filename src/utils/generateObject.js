@@ -81,9 +81,9 @@ async function updatePlayers() {
 
       // player.rank = { level: 0, name: "F", cost: 0 };
 
-      // for (let i = 0; i < weights.length; i++) {
-      //   player.weightModifiers.push({ flat: weights[i], multiplier: 1 });
-      // }
+      for (let i = 0; i < weights.length; i++) {
+        player.weightModifiers.push({ flat: weights[i], multiplier: 1 });
+      }
 
       // player.fun.rpsCount = 0;
       // player.fun.rpsWins = 0;
@@ -177,8 +177,7 @@ async function updateSchemas() {
 }
 
 async function run() {
-  // await updatePlayers();
-  await updateTargetPlayer();
+  await updatePlayers();
 
   process.exit(0);
 }

@@ -25,9 +25,6 @@ module.exports = {
       const player = await Player.findOne(query);
 
       if (player) {
-        // Updates player rank
-        await updateWeightsByRank(player);
-
         // Records the coins before mining.
         const coinsBefore = player.coins;
 
