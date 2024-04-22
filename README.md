@@ -29,8 +29,7 @@ Commands:
 `/mine`: Mines random ores to earn coins.  
 `/pay <user> <amount>`: Allows the user to pay another user a set amount of coins.  
 `/cf <bet>`: Flips a coin with a bet.  
-`/rankup`: Allows the user to buy the next rank using coins.  
-- Higher ranks rewards the user with higher chance of obtaining quality ores when mining.  
+`/rankup`: Allows the user to buy the next rank using coins. Higher ranks rewards the user with higher chance of obtaining quality ores when mining.  
 Misc Commands:  
 `/meow`: Tells Dr. Ratio to meow. (low chance for a special interaction)  
 `/roll <die>`: Allows the user to roll a die. Dice notation (ex. `2d6`) or any `integer` works as inputs for `<die>`.  
