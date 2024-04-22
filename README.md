@@ -15,4 +15,8 @@ npm install -g nodemon
 npm install mongoose
 npm install discord.js
 npm install dotenv
+
+# installed but unused
+npm install mongodb
+npm install python-script
 ```
