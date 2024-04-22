@@ -16,7 +16,7 @@ module.exports = {
 
     if (cooldowns.has(interaction.user.id)) {
       interaction.reply({
-        content: `You are currently on a cooldown. You can only mine once every 5 seconds.`,
+        content: `You are currently on a cooldown. You can only mine once every 3 seconds.`,
         ephemeral: true,
       });
       return;
@@ -70,7 +70,7 @@ module.exports = {
           cooldowns.add(interaction.user.id);
           setTimeout(() => {
             cooldowns.delete(interaction.user.id);
-          }, 5000);
+          }, 2500);
         }
       } else {
         interaction.reply({
