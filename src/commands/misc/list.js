@@ -27,7 +27,9 @@ module.exports = {
       console.log(userCount);
 
       // Uses a cursor to iterate through the collection.
-      const cursor = Player.find().sort({ coins: -1 }).cursor({ limit: 10 });
+      const cursor = Player.find()
+        .sort({ rankLevel: -1, coins: -1 })
+        .cursor({ limit: 10 });
 
       cursor.on("data", (user) => {
         userList +=

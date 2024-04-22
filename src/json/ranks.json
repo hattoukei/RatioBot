@@ -1,0 +1,124 @@
+{
+  "rankWeights": [
+    {
+      "id": "F",
+      "weights": [
+        { "name": "dirt", "weight": 15 },
+        { "name": "stone", "weight": 40 },
+        { "name": "coal", "weight": 60 },
+        { "name": "copper", "weight": 20 },
+        { "name": "iron", "weight": 40 },
+        { "name": "gold", "weight": 25 },
+        { "name": "quartz", "weight": 15 },
+        { "name": "diamond", "weight": 6 },
+        { "name": "emerald", "weight": 3 },
+        { "name": "bedrock", "weight": 1 }
+      ]
+    },
+    {
+      "id": "D",
+      "weights": [
+        { "name": "dirt", "weight": 5 },
+        { "name": "stone", "weight": 30 },
+        { "name": "coal", "weight": 50 },
+        { "name": "copper", "weight": 30 },
+        { "name": "iron", "weight": 45 },
+        { "name": "gold", "weight": 30 },
+        { "name": "quartz", "weight": 20 },
+        { "name": "diamond", "weight": 8 },
+        { "name": "emerald", "weight": 4 },
+        { "name": "bedrock", "weight": 1 }
+      ]
+    },
+    {
+      "id": "C",
+      "weights": [
+        { "name": "dirt", "weight": 3 },
+        { "name": "stone", "weight": 15 },
+        { "name": "coal", "weight": 45 },
+        { "name": "copper", "weight": 45 },
+        { "name": "iron", "weight": 60 },
+        { "name": "gold", "weight": 40 },
+        { "name": "quartz", "weight": 28 },
+        { "name": "diamond", "weight": 10 },
+        { "name": "emerald", "weight": 5 },
+        { "name": "bedrock", "weight": 1 }
+      ]
+    },
+    {
+      "id": "B",
+      "weights": [
+        { "name": "dirt", "weight": 1 },
+        { "name": "stone", "weight": 5 },
+        { "name": "coal", "weight": 40 },
+        { "name": "copper", "weight": 40 },
+        { "name": "iron", "weight": 75 },
+        { "name": "gold", "weight": 65 },
+        { "name": "quartz", "weight": 40 },
+        { "name": "diamond", "weight": 15 },
+        { "name": "emerald", "weight": 6 },
+        { "name": "bedrock", "weight": 1 }
+      ]
+    },
+    {
+      "id": "A",
+      "weights": [
+        { "name": "dirt", "weight": 0 },
+        { "name": "stone", "weight": 3 },
+        { "name": "coal", "weight": 15 },
+        { "name": "copper", "weight": 20 },
+        { "name": "iron", "weight": 45 },
+        { "name": "gold", "weight": 55 },
+        { "name": "quartz", "weight": 75 },
+        { "name": "diamond", "weight": 20 },
+        { "name": "emerald", "weight": 8 },
+        { "name": "bedrock", "weight": 2 }
+      ]
+    },
+    {
+      "id": "S",
+      "weights": [
+        { "name": "dirt", "weight": 0 },
+        { "name": "stone", "weight": 0 },
+        { "name": "coal", "weight": 15 },
+        { "name": "copper", "weight": 20 },
+        { "name": "iron", "weight": 45 },
+        { "name": "gold", "weight": 55 },
+        { "name": "quartz", "weight": 75 },
+        { "name": "diamond", "weight": 20 },
+        { "name": "emerald", "weight": 8 },
+        { "name": "bedrock", "weight": 2 }
+      ]
+    },
+    {
+      "id": "S+",
+      "weights": [
+        { "name": "dirt", "weight": 0 },
+        { "name": "stone", "weight": 0 },
+        { "name": "coal", "weight": 0 },
+        { "name": "copper", "weight": 5 },
+        { "name": "iron", "weight": 20 },
+        { "name": "gold", "weight": 30 },
+        { "name": "quartz", "weight": 60 },
+        { "name": "diamond", "weight": 45 },
+        { "name": "emerald", "weight": 12 },
+        { "name": "bedrock", "weight": 3 }
+      ]
+    },
+    {
+      "id": "???",
+      "weights": [
+        { "name": "dirt", "weight": 0 },
+        { "name": "stone", "weight": 0 },
+        { "name": "coal", "weight": 0 },
+        { "name": "copper", "weight": 0 },
+        { "name": "iron", "weight": 0 },
+        { "name": "gold", "weight": 10 },
+        { "name": "quartz", "weight": 25 },
+        { "name": "diamond", "weight": 45 },
+        { "name": "emerald", "weight": 15 },
+        { "name": "bedrock", "weight": 5 }
+      ]
+    }
+  ]
+}

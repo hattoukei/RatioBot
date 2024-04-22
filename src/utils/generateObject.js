@@ -178,7 +178,7 @@ async function updateSchemas() {
 
 async function run() {
   // await updatePlayers();
-  // await updateTargetPlayer();
+  await updateTargetPlayer();
 
   process.exit(0);
 }
