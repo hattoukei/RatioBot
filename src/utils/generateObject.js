@@ -10,8 +10,26 @@ const Player = require("../schemas/player.js");
 const Ore = require("../schemas/ores.js");
 const mineWeight = require("../schemas/mineWeight.js");
 const mineRank = require("../schemas/mineRanks.js");
+const Multipliers = require("../schemas/multipliers.js");
 
 mongoose.connect(process.env.MONGO_URI);
+
+async function updateMultiplierList(multiplierList) {
+  for (const multiplier of multiplierList) {
+    try {
+      await Multipliers.findOneAndUpdate(
+        { name: multiplier.name },
+        multiplier,
+        {
+          new: true,
+          upsert: true,
+        }
+      );
+    } catch (error) {
+      console.log(`Duplicate entry was attempted.`);
+    }
+  }
+}
 
 async function updateOreList(oreList) {
   for (const ore of oreList) {
@@ -70,28 +88,37 @@ async function findBaseWeights() {
   }
 }
 
-async function updatePlayers() {
+async function updateNewWeights() {
   try {
     const weights = await mineWeight.find({ isBase: "true" });
     const players = await Player.find();
     for (const player of players) {
-      // player.power = 0;
-
-      // player.inventory = [0];
-
-      // player.rank = { level: 0, name: "F", cost: 0 };
-
       for (let i = 0; i < weights.length; i++) {
-        player.weightModifiers.push({ flat: weights[i], multiplier: 1 });
+        let isDuplicate = false;
+        for (const existingObj of player.weightModifiers) {
+          // Check for object equality (adapt based on your comparison logic)
+          if (
+            JSON.stringify(weights[i].ore.name) ===
+            JSON.stringify(existingObj.flat.ore.name)
+          ) {
+            isDuplicate = true;
+            break;
+          }
+        }
+        if (!isDuplicate) {
+          player.weightModifiers.push({ flat: weights[i], multiplier: 1 });
+        }
       }
-
-      // player.fun.rpsCount = 0;
-      // player.fun.rpsWins = 0;
-      // player.fun.rpsLosses = 0;
-      // player.fun.rpsTies = 0;
-
       await player.save();
     }
+    console.log(`Successfully updated all players with new weights!`);
+  } catch (error) {
+    console.log(`Error when updating players' mineweights: ${error.stack}`);
+  }
+}
+
+async function updatePlayers() {
+  try {
     console.log(`Successfully updated all players!`);
   } catch (error) {
     console.log(`Error when updating players: ${error.stack}`);
@@ -129,28 +156,32 @@ async function updateTargetPlayer() {
 
 async function updateSchemas() {
   // Schemas
+  const multipliers = [{ name: "globalMineMultiplier", multiplier: 1 }];
+
   const ranks = [
     { level: 0, name: "F", cost: 0 },
     { level: 1, name: "D", cost: 2500 },
     { level: 2, name: "C", cost: 10000 },
     { level: 3, name: "B", cost: 50000 },
-    { level: 4, name: "A", cost: 20000 },
-    { level: 5, name: "S", cost: 1000000 },
-    { level: 6, name: "S+", cost: 10000000 },
-    { level: 7, name: "???", cost: 50000000 },
+    { level: 4, name: "A", cost: 125000 },
+    { level: 5, name: "S", cost: 250000 },
+    { level: 6, name: "S+", cost: 500000 },
+    { level: 7, name: "???", cost: 1000000 },
+    { level: 8, name: "The End", cost: 2147483647 },
   ];
 
   const ores = [
     { name: "dirt", minValue: 1, maxValue: 7 },
     { name: "stone", minValue: 5, maxValue: 15 },
-    { name: "coal", minValue: 20, maxValue: 40 },
-    { name: "copper", minValue: 25, maxValue: 50 },
-    { name: "iron", minValue: 45, maxValue: 85 },
-    { name: "gold", minValue: 80, maxValue: 135 },
-    { name: "quartz", minValue: 150, maxValue: 265 },
-    { name: "diamond", minValue: 245, maxValue: 375 },
+    { name: "coal", minValue: 35, maxValue: 40 },
+    { name: "copper", minValue: 25, maxValue: 65 },
+    { name: "iron", minValue: 45, maxValue: 105 },
+    { name: "gold", minValue: 80, maxValue: 165 },
+    { name: "quartz", minValue: 150, maxValue: 365 },
+    { name: "diamond", minValue: 525, maxValue: 975 },
     { name: "emerald", minValue: 625, maxValue: 3275 },
     { name: "bedrock", minValue: 8775, maxValue: 12250 },
+    { name: "aether", minValue: 0, maxValue: 65536 },
   ];
 
   const bases = [
@@ -164,20 +195,25 @@ async function updateSchemas() {
     { name: "diamond", weight: 6 },
     { name: "emerald", weight: 3 },
     { name: "bedrock", weight: 1 },
+    { name: "aether", weight: 1 },
   ];
 
-  await updateMineRanks(ranks);
-  console.log(`Successfully updated ranks to mineRank Schema!`);
+  await updateMultiplierList(multipliers);
+  console.log("Finished adding multipliers to Multiplier Schema!");
 
-  await updateOreList(ores);
-  console.log("Finished adding ores to Ore Schema!");
+  // await updateOreList(ores);
+  // console.log("Finished adding ores to Ore Schema!");
 
-  await updateBaseWeights(bases);
-  console.log("Finished adding base weights to mineWeight Schema!");
+  // await updateMineRanks(ranks);
+  // console.log(`Successfully updated ranks to mineRank Schema!`);
+
+  // await updateBaseWeights(bases);
+  // console.log("Finished adding base weights to mineWeight Schema!");
 }
 
 async function run() {
-  await updatePlayers();
+  await updateSchemas();
+  // await updateNewWeights();
 
   process.exit(0);
 }

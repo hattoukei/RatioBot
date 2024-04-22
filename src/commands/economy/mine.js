@@ -1,5 +1,6 @@
 const Player = require("../../schemas/player");
 const Ores = require("../../schemas/ores");
+const Multipliers = require("../../schemas/multipliers");
 const randomNum = require("../../utils/generateRandomNumber");
 const cooldowns = new Set();
 
@@ -30,10 +31,13 @@ module.exports = {
     try {
       // Finds the player by above query
       const player = await Player.findOne(query);
+      const mineMultiplier = await Multipliers.findOne({
+        name: "globalMineMultiplier",
+      });
 
       if (player) {
         // Multiplier
-        const multiplier = 2;
+        const globalMultiplier = mineMultiplier.multiplier;
 
         // Records the coins before mining.
         const coinsBefore = player.coins;
@@ -47,8 +51,10 @@ module.exports = {
         const targetOre = await Ores.findOne({ name: oreName });
         let amount = randomNum(targetOre.minValue, targetOre.maxValue);
 
+        amount = Math.floor(amount * globalMultiplier);
+
         // Adds and saves coin amount to player.
-        player.coins += multiplier * amount;
+        player.coins += amount;
         await player.save();
 
         // Determines the amount of coins
@@ -59,8 +65,8 @@ module.exports = {
         });
 
         let reply = `<@${interaction.user.id}> Successfully mined a ${targetOre.name} ore! You gained ${amount} coins!`;
-        if (multiplier != 1) {
-          reply += `[${multiplier}X BOOST]`;
+        if (globalMultiplier != 1) {
+          reply += `[${globalMultiplier}X]`;
         }
 
         interaction.reply({
