@@ -32,6 +32,9 @@ module.exports = {
       const player = await Player.findOne(query);
 
       if (player) {
+        // Multiplier
+        const multiplier = 2;
+
         // Records the coins before mining.
         const coinsBefore = player.coins;
 
@@ -45,7 +48,7 @@ module.exports = {
         let amount = randomNum(targetOre.minValue, targetOre.maxValue);
 
         // Adds and saves coin amount to player.
-        player.coins += amount;
+        player.coins += multiplier * amount;
         await player.save();
 
         // Determines the amount of coins
@@ -55,9 +58,15 @@ module.exports = {
           console.log(`Error adding coins: ${e}`);
         });
 
-        interaction.reply(
-          `<@${interaction.user.id}> Successfully mined a ${targetOre.name} ore! You gained ${amount} coins!`
-        );
+        let reply = `<@${interaction.user.id}> Successfully mined a ${targetOre.name} ore! You gained ${amount} coins!`;
+        if (multiplier != 1) {
+          reply += `[${multiplier}X BOOST]`;
+        }
+
+        interaction.reply({
+          content: reply,
+          ephemeral: false,
+        });
 
         console.log(
           `    Coins for ${player.userName} went from ${coinsBefore} -> ${coinsAfter}.`
