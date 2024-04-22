@@ -25,6 +25,7 @@ async function updateMultiplierList(multiplierList) {
           upsert: true,
         }
       );
+      console.log(`Successfilly updated ${multiplier.name} multiplier!`);
     } catch (error) {
       console.log(`Duplicate entry was attempted.`);
     }
@@ -148,7 +149,7 @@ async function updateTargetPlayer() {
     player.rank = "F";
 
     await player.save();
-    console.log(`Successfully updated player!`);
+    console.log(`Successfully updated ${player.userName}!`);
   } catch (error) {
     console.log(`Error when updating player: ${error.stack}`);
   }
@@ -164,9 +165,9 @@ async function updateSchemas() {
     { level: 2, name: "C", cost: 10000 },
     { level: 3, name: "B", cost: 50000 },
     { level: 4, name: "A", cost: 125000 },
-    { level: 5, name: "S", cost: 250000 },
-    { level: 6, name: "S+", cost: 500000 },
-    { level: 7, name: "???", cost: 1000000 },
+    { level: 5, name: "S", cost: 300000 },
+    { level: 6, name: "S+", cost: 750000 },
+    { level: 7, name: "???", cost: 1717517 },
     { level: 8, name: "The End", cost: 2147483647 },
   ];
 
@@ -204,8 +205,8 @@ async function updateSchemas() {
   // await updateOreList(ores);
   // console.log("Finished adding ores to Ore Schema!");
 
-  // await updateMineRanks(ranks);
-  // console.log(`Successfully updated ranks to mineRank Schema!`);
+  await updateMineRanks(ranks);
+  console.log(`Successfully updated ranks to mineRank Schema!`);
 
   // await updateBaseWeights(bases);
   // console.log("Finished adding base weights to mineWeight Schema!");

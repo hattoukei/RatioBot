@@ -1,4 +1,5 @@
 const Player = require("../../schemas/player");
+const mineWeight = require("../../schemas/mineWeight");
 
 module.exports = {
   name: "dbreg",
@@ -36,7 +37,10 @@ module.exports = {
           guildId: interaction.guild.id,
           userName: interaction.user.username,
           coins: 0,
+          weights: [],
         });
+
+        await newPlayer.save();
 
         const weights = await mineWeight.find({ isBase: "true" });
 
