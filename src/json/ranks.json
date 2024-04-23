@@ -13,6 +13,7 @@
         { "name": "diamond", "weight": 6 },
         { "name": "emerald", "weight": 3 },
         { "name": "bedrock", "weight": 1 },
+        { "name": "aether", "weight": 0 },
         { "name": "obamium", "weight": 0 }
       ]
     },
@@ -29,6 +30,7 @@
         { "name": "diamond", "weight": 8 },
         { "name": "emerald", "weight": 4 },
         { "name": "bedrock", "weight": 1 },
+        { "name": "aether", "weight": 0 },
         { "name": "obamium", "weight": 0 }
       ]
     },
@@ -45,6 +47,7 @@
         { "name": "diamond", "weight": 10 },
         { "name": "emerald", "weight": 5 },
         { "name": "bedrock", "weight": 1 },
+        { "name": "aether", "weight": 0 },
         { "name": "obamium", "weight": 0 }
       ]
     },
@@ -61,6 +64,7 @@
         { "name": "diamond", "weight": 15 },
         { "name": "emerald", "weight": 6 },
         { "name": "bedrock", "weight": 1 },
+        { "name": "aether", "weight": 0 },
         { "name": "obamium", "weight": 1 }
       ]
     },
@@ -77,6 +81,7 @@
         { "name": "diamond", "weight": 20 },
         { "name": "emerald", "weight": 8 },
         { "name": "bedrock", "weight": 2 },
+        { "name": "aether", "weight": 0 },
         { "name": "obamium", "weight": 1 }
       ]
     },
@@ -93,6 +98,7 @@
         { "name": "diamond", "weight": 25 },
         { "name": "emerald", "weight": 12 },
         { "name": "bedrock", "weight": 3 },
+        { "name": "aether", "weight": 0 },
         { "name": "obamium", "weight": 1 }
       ]
     },
@@ -109,6 +115,7 @@
         { "name": "diamond", "weight": 32 },
         { "name": "emerald", "weight": 18 },
         { "name": "bedrock", "weight": 4 },
+        { "name": "aether", "weight": 0 },
         { "name": "obamium", "weight": 1 }
       ]
     },
@@ -125,6 +132,7 @@
         { "name": "diamond", "weight": 40 },
         { "name": "emerald", "weight": 25 },
         { "name": "bedrock", "weight": 5 },
+        { "name": "aether", "weight": 0 },
         { "name": "obamium", "weight": 1 }
       ]
     }
