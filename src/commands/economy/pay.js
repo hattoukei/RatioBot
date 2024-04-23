@@ -5,7 +5,7 @@ const Player = require("../../schemas/player");
 module.exports = {
   name: "pay",
   description: "Gives some of your coins to a user.",
-  devOnly: true,
+  devOnly: false,
   testOnly: true,
   options: [
     {

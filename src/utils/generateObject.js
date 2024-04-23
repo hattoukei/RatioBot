@@ -123,9 +123,13 @@ async function updatePlayers() {
   try {
     const players = await Player.find();
     for (const player of players) {
-      player.mineMultiplier = 1;
-
-      await player.save();
+      for (const obj in player.weightModifiers) {
+        if (JSON.stringify(obj.flat.ore.name) === "obamium") {
+          obj.flat.weightValue = 1;
+          console.log("updated obamium");
+          await player.save();
+        }
+      }
     }
 
     console.log(`Successfully updated all players!`);
@@ -153,11 +157,16 @@ async function updateMineRanks(mineRanks) {
 async function updateTargetPlayer() {
   try {
     const player = await Player.findOne({ userName: "tensofu" });
-    player.rankLevel = 0;
-    player.rank = "F";
+    if (player) {
+      player.rankLevel = 0;
+      player.rank = "F";
+      player.coins = 0;
 
-    await player.save();
-    console.log(`Successfully updated ${player.userName}!`);
+      await player.save();
+      console.log(`Successfully updated ${player.userName}!`);
+    } else {
+      console.log(`Could not find player by name.`);
+    }
   } catch (error) {
     console.log(`Error when updating player: ${error.stack}`);
   }
@@ -205,7 +214,7 @@ async function updateSchemas() {
     { name: "emerald", weight: 3 },
     { name: "bedrock", weight: 1 },
     { name: "aether", weight: 0 },
-    { name: "obamium", weight: 0 },
+    { name: "obamium", weight: 1 },
   ];
 
   await updateMultiplierList(multipliers);
@@ -222,9 +231,10 @@ async function updateSchemas() {
 }
 
 async function run() {
-  await updateSchemas();
-  await updatePlayers();
+  // await updateSchemas();
+  // await updatePlayers();
   // await updateNewWeights();
+  await updateTargetPlayer();
 
   process.exit(0);
 }
