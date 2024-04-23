@@ -43,6 +43,10 @@ const playerSchema = new Schema({
       },
     },
   ],
+  mineMultiplier: {
+    type: Number,
+    default: 1,
+  },
   fun: {
     rpsCount: {
       type: Number,

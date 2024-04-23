@@ -38,6 +38,7 @@ module.exports = {
       if (player) {
         // Multiplier
         const globalMultiplier = mineMultiplier.multiplier;
+        const personalMultiplier = player.mineMultiplier;
 
         // Records the coins before mining.
         const coinsBefore = player.coins;
@@ -51,7 +52,7 @@ module.exports = {
         const targetOre = await Ores.findOne({ name: oreName });
         let amount = randomNum(targetOre.minValue, targetOre.maxValue);
 
-        amount = Math.floor(amount * globalMultiplier);
+        amount = Math.floor(amount * globalMultiplier * personalMultiplier);
 
         // Adds and saves coin amount to player.
         player.coins += amount;
@@ -66,7 +67,7 @@ module.exports = {
 
         let reply = `<@${interaction.user.id}> Successfully mined a ${targetOre.name} ore! You gained ${amount} coins!`;
         if (globalMultiplier != 1) {
-          reply += `[${globalMultiplier}X]`;
+          reply += ` [${globalMultiplier}X]`;
         }
 
         interaction.reply({
@@ -75,7 +76,7 @@ module.exports = {
         });
 
         console.log(
-          `    Coins for ${player.userName} went from ${coinsBefore} -> ${coinsAfter}.`
+          `    Coins for ${player.userName} went from ${coinsBefore} -> ${coinsAfter}. (${personalMultiplier}X Multiplier)`
         );
 
         // Handles timers

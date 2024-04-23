@@ -11,6 +11,7 @@ const Ore = require("../schemas/ores.js");
 const mineWeight = require("../schemas/mineWeight.js");
 const mineRank = require("../schemas/mineRanks.js");
 const Multipliers = require("../schemas/multipliers.js");
+const Counters = require("../schemas/counters.js");
 
 mongoose.connect(process.env.MONGO_URI);
 
@@ -120,6 +121,13 @@ async function updateNewWeights() {
 
 async function updatePlayers() {
   try {
+    const players = await Player.find();
+    for (const player of players) {
+      player.mineMultiplier = 1;
+
+      await player.save();
+    }
+
     console.log(`Successfully updated all players!`);
   } catch (error) {
     console.log(`Error when updating players: ${error.stack}`);
@@ -182,7 +190,7 @@ async function updateSchemas() {
     { name: "diamond", minValue: 525, maxValue: 975 },
     { name: "emerald", minValue: 625, maxValue: 3275 },
     { name: "bedrock", minValue: 8775, maxValue: 12250 },
-    { name: "aether", minValue: 0, maxValue: 65536 },
+    { name: "obamium", minValue: 0, maxValue: 65536 },
   ];
 
   const bases = [
@@ -196,17 +204,18 @@ async function updateSchemas() {
     { name: "diamond", weight: 6 },
     { name: "emerald", weight: 3 },
     { name: "bedrock", weight: 1 },
-    { name: "aether", weight: 1 },
+    { name: "aether", weight: 0 },
+    { name: "obamium", weight: 0 },
   ];
 
   await updateMultiplierList(multipliers);
   console.log("Finished adding multipliers to Multiplier Schema!");
 
-  // await updateOreList(ores);
-  // console.log("Finished adding ores to Ore Schema!");
+  await updateOreList(ores);
+  console.log("Finished adding ores to Ore Schema!");
 
-  await updateMineRanks(ranks);
-  console.log(`Successfully updated ranks to mineRank Schema!`);
+  // await updateMineRanks(ranks);
+  // console.log(`Successfully updated ranks to mineRank Schema!`);
 
   // await updateBaseWeights(bases);
   // console.log("Finished adding base weights to mineWeight Schema!");
@@ -214,6 +223,7 @@ async function updateSchemas() {
 
 async function run() {
   await updateSchemas();
+  await updatePlayers();
   // await updateNewWeights();
 
   process.exit(0);

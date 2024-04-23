@@ -12,7 +12,8 @@
         { "name": "quartz", "weight": 15 },
         { "name": "diamond", "weight": 6 },
         { "name": "emerald", "weight": 3 },
-        { "name": "bedrock", "weight": 1 }
+        { "name": "bedrock", "weight": 1 },
+        { "name": "obamium", "weight": 0 }
       ]
     },
     {
@@ -27,7 +28,8 @@
         { "name": "quartz", "weight": 20 },
         { "name": "diamond", "weight": 8 },
         { "name": "emerald", "weight": 4 },
-        { "name": "bedrock", "weight": 1 }
+        { "name": "bedrock", "weight": 1 },
+        { "name": "obamium", "weight": 0 }
       ]
     },
     {
@@ -42,7 +44,8 @@
         { "name": "quartz", "weight": 28 },
         { "name": "diamond", "weight": 10 },
         { "name": "emerald", "weight": 5 },
-        { "name": "bedrock", "weight": 1 }
+        { "name": "bedrock", "weight": 1 },
+        { "name": "obamium", "weight": 0 }
       ]
     },
     {
@@ -57,7 +60,8 @@
         { "name": "quartz", "weight": 40 },
         { "name": "diamond", "weight": 15 },
         { "name": "emerald", "weight": 6 },
-        { "name": "bedrock", "weight": 1 }
+        { "name": "bedrock", "weight": 1 },
+        { "name": "obamium", "weight": 1 }
       ]
     },
     {
@@ -72,7 +76,8 @@
         { "name": "quartz", "weight": 55 },
         { "name": "diamond", "weight": 20 },
         { "name": "emerald", "weight": 8 },
-        { "name": "bedrock", "weight": 2 }
+        { "name": "bedrock", "weight": 2 },
+        { "name": "obamium", "weight": 1 }
       ]
     },
     {
@@ -87,7 +92,8 @@
         { "name": "quartz", "weight": 50 },
         { "name": "diamond", "weight": 25 },
         { "name": "emerald", "weight": 12 },
-        { "name": "bedrock", "weight": 3 }
+        { "name": "bedrock", "weight": 3 },
+        { "name": "obamium", "weight": 1 }
       ]
     },
     {
@@ -102,7 +108,8 @@
         { "name": "quartz", "weight": 45 },
         { "name": "diamond", "weight": 32 },
         { "name": "emerald", "weight": 18 },
-        { "name": "bedrock", "weight": 4 }
+        { "name": "bedrock", "weight": 4 },
+        { "name": "obamium", "weight": 1 }
       ]
     },
     {
@@ -117,7 +124,8 @@
         { "name": "quartz", "weight": 30 },
         { "name": "diamond", "weight": 40 },
         { "name": "emerald", "weight": 25 },
-        { "name": "bedrock", "weight": 5 }
+        { "name": "bedrock", "weight": 5 },
+        { "name": "obamium", "weight": 1 }
       ]
     }
   ]
