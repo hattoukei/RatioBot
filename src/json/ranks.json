@@ -116,7 +116,7 @@
         { "name": "emerald", "weight": 18 },
         { "name": "bedrock", "weight": 4 },
         { "name": "aether", "weight": 0 },
-        { "name": "obamium", "weight": 1 }
+        { "name": "obamium", "weight": 2 }
       ]
     },
     {
@@ -133,7 +133,7 @@
         { "name": "emerald", "weight": 25 },
         { "name": "bedrock", "weight": 5 },
         { "name": "aether", "weight": 0 },
-        { "name": "obamium", "weight": 1 }
+        { "name": "obamium", "weight": 3 }
       ]
     },
     {
@@ -150,7 +150,7 @@
         { "name": "emerald", "weight": 0 },
         { "name": "bedrock", "weight": 0 },
         { "name": "aether", "weight": 0 },
-        { "name": "obamium", "weight": 0 }
+        { "name": "obamium", "weight": 1 }
       ]
     }
   ]
