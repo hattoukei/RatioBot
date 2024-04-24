@@ -126,14 +126,31 @@
         { "name": "stone", "weight": 0 },
         { "name": "coal", "weight": 0 },
         { "name": "copper", "weight": 0 },
-        { "name": "iron", "weight": 0 },
-        { "name": "gold", "weight": 15 },
-        { "name": "quartz", "weight": 30 },
+        { "name": "iron", "weight": 3 },
+        { "name": "gold", "weight": 17 },
+        { "name": "quartz", "weight": 25 },
         { "name": "diamond", "weight": 40 },
-        { "name": "emerald", "weight": 25 },
+        { "name": "emerald", "weight": 20 },
         { "name": "bedrock", "weight": 5 },
         { "name": "aether", "weight": 0 },
-        { "name": "obamium", "weight": 3 }
+        { "name": "obamium", "weight": 2 }
+      ]
+    },
+    {
+      "id": "Transcendent",
+      "weights": [
+        { "name": "dirt", "weight": 0 },
+        { "name": "stone", "weight": 0 },
+        { "name": "coal", "weight": 0 },
+        { "name": "copper", "weight": 0 },
+        { "name": "iron", "weight": 0 },
+        { "name": "gold", "weight": 0 },
+        { "name": "quartz", "weight": 5 },
+        { "name": "diamond", "weight": 18 },
+        { "name": "emerald", "weight": 25 },
+        { "name": "bedrock", "weight": 12 },
+        { "name": "aether", "weight": 0 },
+        { "name": "obamium", "weight": 5 }
       ]
     },
     {

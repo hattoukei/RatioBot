@@ -175,8 +175,9 @@ async function updateSchemas() {
     { level: 4, name: "A", cost: 125000 },
     { level: 5, name: "S", cost: 300000 },
     { level: 6, name: "S+", cost: 750000 },
-    { level: 7, name: "???", cost: 1717517 },
-    { level: 8, name: "The End", cost: 2147483647 },
+    { level: 7, name: "???", cost: 171717 },
+    { level: 8, name: "Transcendent", cost: 2500000 },
+    { level: 9, name: "The End", cost: 2147483647 },
     { level: 999, name: "TEST", cost: 2147483647 },
   ];
 
