@@ -158,10 +158,7 @@ async function updateTargetPlayer() {
   try {
     const player = await Player.findOne({ userName: "tensofu" });
     if (player) {
-      player.rankLevel = 0;
-      player.rank = "F";
-      player.coins = 0;
-
+      await player.setRank(999);
       await player.save();
       console.log(`Successfully updated ${player.userName}!`);
     } else {
@@ -186,6 +183,7 @@ async function updateSchemas() {
     { level: 6, name: "S+", cost: 750000 },
     { level: 7, name: "???", cost: 1717517 },
     { level: 8, name: "The End", cost: 2147483647 },
+    { level: 999, name: "TEST", cost: 2147483647 },
   ];
 
   const ores = [
@@ -217,21 +215,21 @@ async function updateSchemas() {
     { name: "obamium", weight: 1 },
   ];
 
-  await updateMultiplierList(multipliers);
-  console.log("Finished adding multipliers to Multiplier Schema!");
+  // await updateMultiplierList(multipliers);
+  // console.log("Finished adding multipliers to Multiplier Schema!");
 
-  await updateOreList(ores);
-  console.log("Finished adding ores to Ore Schema!");
+  // await updateOreList(ores);
+  // console.log("Finished adding ores to Ore Schema!");
 
-  // await updateMineRanks(ranks);
-  // console.log(`Successfully updated ranks to mineRank Schema!`);
+  await updateMineRanks(ranks);
+  console.log(`Successfully updated ranks to mineRank Schema!`);
 
   // await updateBaseWeights(bases);
   // console.log("Finished adding base weights to mineWeight Schema!");
 }
 
 async function run() {
-  // await updateSchemas();
+  await updateSchemas();
   // await updatePlayers();
   // await updateNewWeights();
   await updateTargetPlayer();
@@ -240,42 +238,3 @@ async function run() {
 }
 
 run();
-
-/*
-async function run() {
-  const find = await Player.findOne({ userId: "310812771971235841" });
-  if (find) {
-    console.log("Player is already found.");
-
-    find.weight.bedrock += 1;
-    console.log("Adding 1 weight to bedrock.");
-    await find.save();
-
-    console.log(find.findTotalWeight());
-    console.log(find.findWeightValues());
-    console.log(find.findOreIndex(4));
-  } else {
-    const newPlayer = await Player.create({
-      userId: "310812771971235841",
-      guildId: "648369787453308928",
-      userName: "tensofu",
-      coins: 100,
-      weight: {
-        wood: 10,
-        stone: 10,
-        coal: 10,
-        iron: 10,
-        gold: 10,
-        diamond: 10,
-        emerald: 10,
-      },
-    });
-
-    console.log(newPlayer);
-    console.log("Player is registered!");
-  }
-
-  console.log("Finished!");
-  process.exit(0);
-}
-*/

@@ -2,7 +2,7 @@ const Player = require("../../schemas/player");
 const mineWeight = require("../../schemas/mineWeight");
 
 module.exports = {
-  name: "dbreg",
+  name: "reg",
   description: "registers your uuid and name for the bot",
   // devOnly: Boolean,
   testOnly: true,

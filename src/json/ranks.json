@@ -135,6 +135,23 @@
         { "name": "aether", "weight": 0 },
         { "name": "obamium", "weight": 1 }
       ]
+    },
+    {
+      "id": "TEST",
+      "weights": [
+        { "name": "dirt", "weight": 1 },
+        { "name": "stone", "weight": 0 },
+        { "name": "coal", "weight": 1 },
+        { "name": "copper", "weight": 0 },
+        { "name": "iron", "weight": 0 },
+        { "name": "gold", "weight": 1 },
+        { "name": "quartz", "weight": 0 },
+        { "name": "diamond", "weight": 1 },
+        { "name": "emerald", "weight": 0 },
+        { "name": "bedrock", "weight": 0 },
+        { "name": "aether", "weight": 0 },
+        { "name": "obamium", "weight": 0 }
+      ]
     }
   ]
 }

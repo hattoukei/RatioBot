@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const mineWeight = require("./mineWeight.js");
 const mineRank = require("./mineRanks.js");
+const Ranks = require("../json/ranks.json");
 
 const playerSchema = new Schema({
   userId: {
@@ -116,6 +117,55 @@ playerSchema.methods.findRankCostNeeded = async function () {
     } else {
       return -1;
     }
+  }
+};
+
+playerSchema.methods.setRank = async function (rlevel) {
+  const targetRank = await mineRank.findOne({ level: rlevel });
+  if (targetRank) {
+    try {
+      this.rankLevel = targetRank.level;
+      this.rank = targetRank.name;
+      await this.save();
+      console.log(`Successfully set ${this.userName}'s ranks!`);
+    } catch (error) {
+      console.log(`Error when setting ${this.userName}'s rank: ${error}`);
+    }
+  } else {
+    console.log(`Could not find rank at level ${rlevel}.`);
+  }
+};
+
+playerSchema.methods.refreshRankWeights = async function () {
+  // From Rank Scehma
+  const currentRank = await mineRank.findOne({ level: this.rankLevel });
+  if (currentRank) {
+    // From JSON
+    const rank = Ranks.rankWeights.find(
+      (rankWeights) => rankWeights.id === currentRank.name
+    );
+    for (const object of this.weightModifiers) {
+      try {
+        for (const weight of rank.weights) {
+          if (
+            weight.name === object.flat.ore.name &&
+            weight.weight != object.flat.weightValue
+          ) {
+            object.flat.weightValue = weight.weight;
+            console.log(
+              `Updated ${weight.name} to weight of ${weight.weight}.`
+            );
+            continue;
+          }
+        }
+      } catch (error) {
+        console.error(`Error updating ranks.`, err);
+      }
+    }
+    await this.save();
+  } else {
+    console.log(`Could not find player's rank.`);
+    return;
   }
 };
 
