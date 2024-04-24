@@ -34,7 +34,7 @@ module.exports = {
     if (targetPlayer) {
       try {
         await targetPlayer.setRank(level);
-        targetPlayer.save();
+        await targetPlayer.save();
         console.log(
           `Successfully set ${targetPlayer.userName}'s rank to level ${level}.`
         );
