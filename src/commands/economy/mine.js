@@ -76,7 +76,7 @@ module.exports = {
         });
 
         console.log(
-          `    Coins for ${player.userName} went from ${coinsBefore} -> ${coinsAfter}. (${personalMultiplier}X Multiplier)`
+          `    Coins for ${player.userName} went from ${coinsBefore} -> ${coinsAfter}. (${personalMultiplier}X Personal Multiplier)`
         );
 
         // Handles timers
@@ -103,7 +103,6 @@ module.exports = {
 function rollOre(table, weight) {
   const roll = Math.ceil(Math.random() * weight);
   let accumulatedWeight = 0;
-  console.log(table);
 
   console.log(`    Rolled: ${roll} out of ${weight}!`);
   for (const ore of table) {

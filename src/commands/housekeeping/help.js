@@ -7,7 +7,7 @@ module.exports = {
   testOnly: true,
 
   callback: async (client, interaction) => {
-    embed = new EmbedBuilder()
+    const embed = new EmbedBuilder()
       .setAuthor({
         name: "List of all commands",
         iconURL: "https://imgur.com/zHVXQF2.png",
