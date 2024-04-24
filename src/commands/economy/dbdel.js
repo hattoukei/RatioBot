@@ -6,7 +6,7 @@ module.exports = {
   devOnly: true,
   testOnly: true,
   // options: Object[],
-  // deleted: Boolean,
+  deleted: true,
 
   callback: async (client, interaction) => {
     let user = interaction.user;
@@ -19,9 +19,9 @@ module.exports = {
       guildId: interaction.guild.id,
     };
 
-    try {
-      const player = await Player.findOne(query);
+    const player = await Player.findOne(query);
 
+    try {
       if (player) {
         console.log(`Deleting UUID '${user.id}' from database.`);
 

@@ -123,13 +123,7 @@ async function updatePlayers() {
   try {
     const players = await Player.find();
     for (const player of players) {
-      for (const obj in player.weightModifiers) {
-        if (JSON.stringify(obj.flat.ore.name) === "obamium") {
-          obj.flat.weightValue = 1;
-          console.log("updated obamium");
-          await player.save();
-        }
-      }
+      await player.refreshRankWeights();
     }
 
     console.log(`Successfully updated all players!`);
@@ -158,8 +152,7 @@ async function updateTargetPlayer() {
   try {
     const player = await Player.findOne({ userName: "tensofu" });
     if (player) {
-      await player.setRank(999);
-      await player.refreshRankWeights();
+      await player.setRank(0);
       await player.save();
       console.log(`Successfully updated ${player.userName}!`);
     } else {
@@ -213,7 +206,7 @@ async function updateSchemas() {
     { name: "emerald", weight: 3 },
     { name: "bedrock", weight: 1 },
     { name: "aether", weight: 0 },
-    { name: "obamium", weight: 1 },
+    { name: "obamium", weight: 0 },
   ];
 
   // await updateMultiplierList(multipliers);
@@ -225,15 +218,15 @@ async function updateSchemas() {
   await updateMineRanks(ranks);
   console.log(`Successfully updated ranks to mineRank Schema!`);
 
-  // await updateBaseWeights(bases);
-  // console.log("Finished adding base weights to mineWeight Schema!");
+  await updateBaseWeights(bases);
+  console.log("Finished adding base weights to mineWeight Schema!");
 }
 
 async function run() {
   // await updateSchemas();
-  // await updatePlayers();
+  await updatePlayers();
   // await updateNewWeights();
-  await updateTargetPlayer();
+  // await updateTargetPlayer();
 
   process.exit(0);
 }

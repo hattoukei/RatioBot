@@ -86,14 +86,12 @@ playerSchema.methods.findTotalWeight = async function () {
 // Returns list of objects as {name, weight}.
 playerSchema.methods.findWeightValues = async function () {
   let ores = [];
-  let modifiers = [];
 
   for (const object of this.weightModifiers) {
     ores.push({
       name: object.flat.ore.name,
       weight: object.flat.weightValue,
     });
-    modifiers.push(object.multiplier);
   }
 
   return ores;
@@ -127,7 +125,9 @@ playerSchema.methods.setRank = async function (rlevel) {
       this.rankLevel = targetRank.level;
       this.rank = targetRank.name;
       await this.save();
-      console.log(`Successfully set ${this.userName}'s ranks!`);
+      console.log(`Successfully set ${this.userName}'s rank!`);
+      await this.refreshRankWeights();
+      console.log(`Successfully updated ${this.userName}'s rank weights!`);
     } catch (error) {
       console.log(`Error when setting ${this.userName}'s rank: ${error}`);
     }
@@ -162,6 +162,7 @@ playerSchema.methods.refreshRankWeights = async function () {
         console.error(`Error updating ranks.`, err);
       }
     }
+    console.log(`Successfully updated ${this.userName}'s rank weights!`);
     await this.save();
   } else {
     console.log(`Could not find player's rank.`);
