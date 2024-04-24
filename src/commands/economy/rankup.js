@@ -39,7 +39,7 @@ module.exports = {
           player.rankLevel = targetRank.level;
           player.rank = targetRank.name;
 
-          await updateWeightsByRank(player);
+          await player.refreshRankWeights();
 
           interaction.reply({
             content: `You successfully ranked up to rank [${targetRank.name}]!`,

@@ -101,7 +101,7 @@ module.exports = {
 };
 
 function rollOre(table, weight) {
-  const roll = Math.floor(Math.random() * weight);
+  const roll = Math.ceil(Math.random() * weight);
   let accumulatedWeight = 0;
   console.log(table);
 

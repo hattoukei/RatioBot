@@ -159,6 +159,7 @@ async function updateTargetPlayer() {
     const player = await Player.findOne({ userName: "tensofu" });
     if (player) {
       await player.setRank(999);
+      await player.refreshRankWeights();
       await player.save();
       console.log(`Successfully updated ${player.userName}!`);
     } else {
@@ -229,7 +230,7 @@ async function updateSchemas() {
 }
 
 async function run() {
-  await updateSchemas();
+  // await updateSchemas();
   // await updatePlayers();
   // await updateNewWeights();
   await updateTargetPlayer();
