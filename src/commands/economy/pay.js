@@ -30,6 +30,14 @@ module.exports = {
     const baseUser = user.id;
     const amount = interaction.options.get("amount").value;
 
+    if (amount <= 0) {
+      interaction.reply({
+        content: `Sorry, you cannot pay a non-positive amount.`,
+        ephemeral: true,
+      });
+      return;
+    }
+
     if (baseUser === targetUser) {
       interaction.reply({
         content: `Sorry, you cannot pay yourself.`,

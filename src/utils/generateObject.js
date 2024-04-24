@@ -219,13 +219,13 @@ async function updateSchemas() {
   await updateMineRanks(ranks);
   console.log(`Successfully updated ranks to mineRank Schema!`);
 
-  await updateBaseWeights(bases);
-  console.log("Finished adding base weights to mineWeight Schema!");
+  // await updateBaseWeights(bases);
+  // console.log("Finished adding base weights to mineWeight Schema!");
 }
 
 async function run() {
-  // await updateSchemas();
-  await updatePlayers();
+  await updateSchemas();
+  // await updatePlayers();
   // await updateNewWeights();
   // await updateTargetPlayer();
 
