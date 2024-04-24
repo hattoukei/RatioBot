@@ -22,7 +22,7 @@ module.exports = {
         },
         { name: "Miscellaneous", value: "`meow`, `roll`, `ping`" }
       )
-      .setFooter("`/help` to return to this page!");
+      .setFooter({ text: "`/help` to return to this page!" });
 
     interaction.reply({ embeds: [embed] });
   },

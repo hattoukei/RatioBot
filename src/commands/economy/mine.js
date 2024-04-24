@@ -81,7 +81,7 @@ module.exports = {
 
         // Handles timers
         if (interaction.user.id === "310812771971235841") {
-          console.log(`Dev spotted. Timer will not be invoked.`);
+          console.log(`    Dev spotted. Timer will not be invoked.`);
         } else {
           cooldowns.add(interaction.user.id);
           setTimeout(() => {
