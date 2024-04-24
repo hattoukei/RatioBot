@@ -62,7 +62,7 @@ module.exports = {
         );
       } else {
         interaction.reply({
-          content: `You must register using /dbreg before using this command.`,
+          content: `You must register using /reg before using this command.`,
           ephemeral: true,
         });
       }

@@ -93,7 +93,7 @@ module.exports = {
       } else {
         interaction.reply({
           content:
-            "There has been an error processing the payment. Verify if both users have registered using `/dbreg`.",
+            "There has been an error processing the payment. Verify if both users have registered using `/reg`.",
           ephemeral: true,
         });
       }

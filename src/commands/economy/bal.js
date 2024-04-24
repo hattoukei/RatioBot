@@ -29,7 +29,7 @@ module.exports = {
         interaction.reply({ embeds: [embed], ephemeral: true });
       } else {
         interaction.reply({
-          content: `Please register using /dbreg before using this command.`,
+          content: `Please register using /reg before using this command.`,
           ephemeral: true,
         });
       }

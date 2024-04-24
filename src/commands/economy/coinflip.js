@@ -102,7 +102,7 @@ module.exports = {
         );
       } else {
         interaction.reply(
-          "You must first register your uuid using `/dbreg` before using this command."
+          "You must first register your uuid using `/reg` before using this command."
         );
         return;
       }
