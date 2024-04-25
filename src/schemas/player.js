@@ -74,6 +74,15 @@ const playerSchema = new Schema({
   ],
 });
 
+// Checks if the user could deduct an amount of coins. True if the amount is less than balance, false otherwise.
+playerSchema.methods.deductionAllowed = async function (amount) {
+  if (this.coins >= amount) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 // Returns total weight
 playerSchema.methods.findTotalWeight = async function () {
   let count = 0;

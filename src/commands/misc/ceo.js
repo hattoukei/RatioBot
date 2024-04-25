@@ -8,7 +8,7 @@ module.exports = {
 
   callback: async (client, interaction) => {
     interaction.reply({
-      content: `Who's the CEO of the Mickey Mouse Clubhouse?: Hdeth. `,
+      content: `Who's the CEO of the Mickey Mouse Clubhouse? Hdeth. `,
     });
   },
 };

@@ -41,6 +41,7 @@ module.exports = {
         // Multiplier
         const globalMultiplier = mineMultiplier.multiplier;
         const personalMultiplier = player.mineMultiplier;
+        const counterMultiplier = 1 + Math.floor(counter.count / 1000) / 100;
 
         // Records the coins before mining.
         const coinsBefore = player.coins;
@@ -54,7 +55,9 @@ module.exports = {
         const targetOre = await Ores.findOne({ name: oreName });
         let amount = randomNum(targetOre.minValue, targetOre.maxValue);
 
-        amount = Math.floor(amount * globalMultiplier * personalMultiplier);
+        amount = Math.floor(
+          amount * globalMultiplier * personalMultiplier * counterMultiplier
+        );
 
         // Adds and saves coin amount to player.
         player.coins += amount;
@@ -79,7 +82,7 @@ module.exports = {
         });
 
         console.log(
-          `    Coins for ${player.userName} went from ${coinsBefore} -> ${coinsAfter}. (${personalMultiplier}X Personal Multiplier)`
+          `    Coins for ${player.userName} went from ${coinsBefore} -> ${coinsAfter}. (${personalMultiplier}X Personal Multiplier) (${counterMultiplier}X Counter Multiplier)`
         );
 
         // Handles timers
