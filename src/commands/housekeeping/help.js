@@ -20,7 +20,10 @@ module.exports = {
           name: "Economy",
           value: "`bal`, `list`, `pay`, `cf`, `mine`, `rankup`",
         },
-        { name: "Miscellaneous", value: "`meow`, `roll`, `ping`" }
+        {
+          name: "Miscellaneous",
+          value: "`meow`, `roll`, `ping`, `ceo`, `counters`",
+        }
       )
       .setFooter({ text: "`/help` to return to this page!" });
 
