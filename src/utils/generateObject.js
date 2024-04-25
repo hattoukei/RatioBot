@@ -15,6 +15,19 @@ const Counters = require("../schemas/counters.js");
 
 mongoose.connect(process.env.MONGO_URI);
 
+async function addCounter(counterList) {
+  for (const counter of counterList) {
+    try {
+      await Counters.create(counter);
+      console.log(
+        `Successfully added ${counter.name} counter at base count of ${counter.count}.`
+      );
+    } catch (error) {
+      console.log(`Duplicate entry was attempted.`);
+    }
+  }
+}
+
 async function updateMultiplierList(multiplierList) {
   for (const multiplier of multiplierList) {
     try {
@@ -165,6 +178,8 @@ async function updateTargetPlayer() {
 
 async function updateSchemas() {
   // Schemas
+  const counters = [{ name: "mine", count: 4796 }];
+
   const multipliers = [{ name: "globalMineMultiplier", multiplier: 1 }];
 
   const ranks = [
@@ -216,8 +231,11 @@ async function updateSchemas() {
   // await updateOreList(ores);
   // console.log("Finished adding ores to Ore Schema!");
 
-  await updateMineRanks(ranks);
-  console.log(`Successfully updated ranks to mineRank Schema!`);
+  await addCounter(counters);
+  console.log(`Successfully updated counters to Counter Schema!`);
+
+  // await updateMineRanks(ranks);
+  // console.log(`Successfully updated ranks to mineRank Schema!`);
 
   // await updateBaseWeights(bases);
   // console.log("Finished adding base weights to mineWeight Schema!");

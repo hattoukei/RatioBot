@@ -2,6 +2,7 @@ const Player = require("../../schemas/player");
 const Ores = require("../../schemas/ores");
 const Multipliers = require("../../schemas/multipliers");
 const randomNum = require("../../utils/generateRandomNumber");
+const Counters = require("../../schemas/counters");
 const cooldowns = new Set();
 
 module.exports = {
@@ -31,6 +32,7 @@ module.exports = {
     try {
       // Finds the player by above query
       const player = await Player.findOne(query);
+      const counter = await Counters.findOne({ name: "mine" });
       const mineMultiplier = await Multipliers.findOne({
         name: "globalMineMultiplier",
       });
@@ -57,6 +59,7 @@ module.exports = {
         // Adds and saves coin amount to player.
         player.coins += amount;
         await player.save();
+        await counter.increment();
 
         // Determines the amount of coins
         const coinsAfter = player.coins;
